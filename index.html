@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ฟิสิกส์ ม.4: การรายงานผลการวัด 📐🧪</title>
+  <!-- Production Tailwind CSS build -->
+  <link rel="stylesheet" href="./styles.css">
+  <!-- Google Fonts: Prompt & Sarabun -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- MathJax Configuration for LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --ink: #14313d;
+      --muted: #5f7480;
+      --paper: rgba(255, 255, 255, 0.92);
+      --line: rgba(20, 49, 61, 0.09);
+      --mint: #35d0ba;
+      --sky: #2f80ed;
+      --sun: #ffcf5a;
+      --coral: #ff7a70;
+    }
+
+    body {
+      font-family: 'Prompt', 'Sarabun', sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(53, 208, 186, 0.12), transparent 28%),
+        linear-gradient(225deg, rgba(255, 207, 90, 0.22), transparent 34%),
+        repeating-linear-gradient(0deg, rgba(20, 49, 61, 0.035) 0 1px, transparent 1px 34px),
+        repeating-linear-gradient(90deg, rgba(20, 49, 61, 0.03) 0 1px, transparent 1px 34px),
+        #f7fbf7;
+      text-rendering: optimizeLegibility;
+    }
+
+    html.exam-locked,
+    body.exam-locked {
+      overscroll-behavior-y: none;
+    }
+
+    .math-font {
+      font-family: 'Sarabun', sans-serif;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0ea5a3 0%, #2f80ed 52%, #ff7a70 100%) !important;
+      box-shadow: 0 12px 30px rgba(20, 49, 61, 0.16);
+    }
+
+    header h1 {
+      letter-spacing: 0;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    header p,
+    header span {
+      color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    main {
+      position: relative;
+    }
+
+    main .bg-white {
+      background: var(--paper) !important;
+      border-color: var(--line) !important;
+      box-shadow: 0 10px 28px rgba(20, 49, 61, 0.07);
+      backdrop-filter: blur(8px);
+    }
+
+    main .rounded-2xl {
+      border-radius: 18px;
+    }
+
+    button,
+    input {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      position: relative;
+      border: 1px solid rgba(20, 49, 61, 0.12) !important;
+      box-shadow:
+        0 4px 0 rgba(20, 49, 61, 0.14),
+        0 10px 20px rgba(20, 49, 61, 0.08);
+      transform: translateY(0);
+      transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        filter 120ms ease,
+        background-color 120ms ease;
+      user-select: none;
+    }
+
+    button:hover {
+      filter: brightness(1.03) saturate(1.04);
+      box-shadow:
+        0 5px 0 rgba(20, 49, 61, 0.16),
+        0 14px 24px rgba(20, 49, 61, 0.11);
+    }
+
+    button:active {
+      transform: translateY(3px);
+      box-shadow:
+        0 1px 0 rgba(20, 49, 61, 0.18),
+        0 5px 12px rgba(20, 49, 61, 0.09);
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(255, 207, 90, 0.72);
+      outline-offset: 3px;
+    }
+
+    button.group,
+    main button:not([onclick="closeAlertModal()"]) {
+      will-change: transform;
+    }
+
+    button.group {
+      border-width: 1px;
+      box-shadow:
+        0 6px 0 rgba(20, 49, 61, 0.12),
+        0 16px 28px rgba(20, 49, 61, 0.09);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    button.group:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 8px 0 rgba(20, 49, 61, 0.13),
+        0 20px 34px rgba(20, 49, 61, 0.13);
+    }
+
+    button.group:active {
+      transform: translateY(2px);
+      box-shadow:
+        0 2px 0 rgba(20, 49, 61, 0.14),
+        0 8px 16px rgba(20, 49, 61, 0.1);
+    }
+
+    button.group:nth-child(1) {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(222, 247, 255, 0.86)) !important;
+    }
+
+    button.group:nth-child(2) {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(232, 255, 241, 0.88)) !important;
+    }
+
+    button.group:nth-child(3) {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255, 239, 221, 0.9)) !important;
+    }
+
+    #sec-home > div:first-child {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(232, 255, 241, 0.9) 48%, rgba(255, 246, 214, 0.88)) !important;
+      border: 1px solid rgba(20, 49, 61, 0.08) !important;
+    }
+
+    #sec-home > div:first-child svg {
+      filter: drop-shadow(0 14px 22px rgba(47, 128, 237, 0.16));
+    }
+
+    #sec-home > div:last-child {
+      background: linear-gradient(135deg, rgba(255, 248, 219, 0.92), rgba(225, 249, 244, 0.9)) !important;
+      border-color: rgba(255, 207, 90, 0.38) !important;
+    }
+
+    #review-tab-single .bg-slate-900 {
+      background: linear-gradient(135deg, #12343b, #0f766e) !important;
+    }
+
+    svg[aria-label="ภาพปลายวัตถุวางบนสเกล"] rect:first-child {
+      fill: #fbfefb;
+    }
+
+    .measurement-figure {
+      position: relative;
+      cursor: zoom-in;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .measurement-figure:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(20, 49, 61, 0.1);
+    }
+
+    .measurement-figure::after {
+      content: "แตะเพื่อซูม";
+      position: absolute;
+      right: 0.75rem;
+      top: 0.75rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(20, 49, 61, 0.78);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    #measurement-zoom-stage svg {
+      width: min(1120px, 175vw);
+      max-width: none;
+      height: auto;
+    }
+
+    body.exam-locked header {
+      position: static !important;
+    }
+
+    .shadow-sm {
+      box-shadow: 0 8px 22px rgba(20, 49, 61, 0.06) !important;
+    }
+
+    .text-slate-800,
+    .text-slate-900,
+    .text-blue-950,
+    .text-indigo-950,
+    .text-violet-950 {
+      color: var(--ink) !important;
+    }
+
+    .text-slate-500,
+    .text-slate-600,
+    .text-slate-700 {
+      color: var(--muted) !important;
+    }
+
+    .bg-blue-600,
+    .bg-indigo-600,
+    .bg-violet-600,
+    .bg-emerald-600 {
+      background: linear-gradient(180deg, #39d5c2 0%, #208de6 100%) !important;
+      border-color: rgba(16, 94, 121, 0.28) !important;
+      color: #fff !important;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    .bg-blue-100,
+    .bg-indigo-100,
+    .bg-violet-100,
+    .bg-slate-100 {
+      background-color: rgba(225, 249, 244, 0.92) !important;
+    }
+
+    .text-blue-600,
+    .text-indigo-600,
+    .text-violet-600 {
+      color: #0b8f89 !important;
+    }
+
+    .border-slate-100,
+    .border-slate-200,
+    .border-blue-100,
+    .border-indigo-100,
+    .border-violet-100 {
+      border-color: var(--line) !important;
+    }
+
+    #mobile-menu {
+      background: rgba(15, 118, 110, 0.96) !important;
+    }
+
+    #mobile-menu button,
+    header button,
+    header .bg-indigo-800 {
+      background: rgba(255, 255, 255, 0.18) !important;
+      border: 1px solid rgba(255, 255, 255, 0.22) !important;
+      color: #fff !important;
+      box-shadow:
+        0 3px 0 rgba(0, 0, 0, 0.14),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-slate-100,
+    .bg-slate-200 {
+      border-color: rgba(20, 49, 61, 0.14) !important;
+      box-shadow:
+        0 4px 0 rgba(20, 49, 61, 0.11),
+        0 10px 18px rgba(20, 49, 61, 0.07);
+    }
+
+    .text-blue-600.bg-transparent,
+    button.text-blue-600:not(.bg-blue-600) {
+      box-shadow: none;
+      border-color: transparent !important;
+    }
+
+    input {
+      border-color: rgba(20, 49, 61, 0.13) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    input:focus {
+      box-shadow: 0 0 0 4px rgba(53, 208, 186, 0.18) !important;
+      border-color: var(--mint) !important;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #12343b, #0f766e) !important;
+      border-top: 0 !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding-top: 1.25rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+
+      header h1 {
+        font-size: 1.05rem !important;
+        line-height: 1.35;
+      }
+
+      main .rounded-2xl {
+        border-radius: 14px;
+      }
+
+      .measurement-figure svg {
+        min-width: 720px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .measurement-figure svg {
+        min-width: 680px;
+      }
+    }
+
+    @media (max-height: 430px) and (orientation: landscape) {
+      header .max-w-6xl {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+      }
+
+      header h1 {
+        font-size: 1rem !important;
+      }
+
+      header p {
+        display: none;
+      }
+    }
+
+    /* Custom Scrollbar for better UI */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Header Banner -->
+  <header class="bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 text-white shadow-md sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="bg-blue-600 text-white p-3 rounded-xl shadow-inner text-2xl flex items-center justify-center">
+          <i class="fa-solid fa-ruler-combined"></i>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-wide">ฟิสิกส์ ม.4: บทเรียนการรายงานผลการวัด</h1>
+          <p class="text-xs md:text-sm text-blue-200">รายวิชา ฟิสิกส์ 1 รหัสวิชา ว31201 โรงเรียนห้องสอนศึกษา ในพระอุปถัมภ์ฯ</p>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center gap-2">
+        <span class="bg-indigo-800 text-indigo-200 px-3 py-1.5 rounded-full text-xs font-semibold border border-indigo-700">
+          <i class="fa-solid fa-graduation-cap mr-1"></i> มัธยมศึกษาปีที่ 4
+        </span>
+        <button onclick="showSection('home')" class="bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg text-xs transition duration-200 flex items-center gap-1">
+          <i class="fa-solid fa-house"></i> หน้าแรก
+        </button>
+      </div>
+      <div class="w-full md:hidden flex items-center justify-between">
+        <span class="bg-indigo-800/80 text-indigo-100 px-3 py-1.5 rounded-full text-[11px] font-semibold border border-indigo-700">ว31201 ฟิสิกส์ 1</span>
+        <button onclick="toggleMobileMenu()" class="bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg text-sm transition duration-200" aria-label="Toggle mobile menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-slate-900/95">
+      <div class="max-w-6xl mx-auto px-4 py-3 grid grid-cols-2 gap-2 text-sm">
+        <button onclick="showSection('home')" class="bg-white/10 rounded-lg py-2">หน้าหลัก</button>
+        <button onclick="showSection('review')" class="bg-white/10 rounded-lg py-2">บทเรียน</button>
+        <button onclick="showSection('practice')" class="bg-white/10 rounded-lg py-2">ฝึกโจทย์</button>
+        <button onclick="showSection('exam-start')" class="bg-white/10 rounded-lg py-2">สอบเก็บคะแนน</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SECTION 1: HOME / LANDING PAGE -->
+    <!-- ---------------------------------------------------- -->
+    <section id="sec-home" class="space-y-8 animate-fade-in">
+      <!-- Welcome Hero Card -->
+      <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-4 max-w-2xl">
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+            ฟิสิกส์พื้นฐานและการวัด
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">
+            การรายงานผลการวัดและค่าความคลาดเคลื่อน <span class="text-blue-600">($x \pm \Delta x$)</span>
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+            ยินดีต้อนรับนักเรียนชั้น ม.4 ทุกคน! เว็บไซต์นี้จะช่วยให้เธอเข้าใจหลักการบันทึกผลการทดลองทางฟิสิกส์อย่างถูกต้อง 
+            เรียนรู้การประมาณค่าด้วยสายตา การวัดครั้งเดียวที่มีสเกลล้อมรอบ การลบค่าผิดปกติ การคำนวณหาพิสัยเฉลี่ย 
+            และการปัดเลขนัยสำคัญที่สอดคล้องกับค่าความคลาดเคลื่อนได้อย่างแม่นยำ พร้อมลุยกันหรือยังครับ!
+          </p>
+          <!-- Quick Status Indicator -->
+          <div id="latest-score-badge" class="hidden bg-slate-100 p-3.5 rounded-xl border border-slate-200 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs md:text-sm text-slate-600">
+              <i class="fa-solid fa-clipboard-check text-emerald-500 text-lg"></i>
+              <span>ผลสอบล่าสุดของคุณ: <strong id="lbl-last-score" class="text-slate-800">-</strong></span>
+            </div>
+            <button onclick="showLatestResultModal()" class="text-blue-600 hover:text-blue-800 font-semibold text-xs flex items-center gap-1">
+              <i class="fa-solid fa-eye"></i> ดูผลสอบละเอียด
+            </button>
+          </div>
+        </div>
+        <div class="w-full md:w-64 flex justify-center">
+          <svg class="w-48 h-48 text-indigo-600" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="80" fill="url(#paint0_linear)" fill-opacity="0.1"/>
+            <path d="M140 100C140 122.091 122.091 140 100 140C77.9086 140 60 122.091 60 100C60 77.9086 77.9086 60 100 60C122.091 60 140 77.9086 140 100Z" stroke="#4F46E5" stroke-width="6" stroke-dasharray="10 15"/>
+            <path d="M100 30V60" stroke="#4F46E5" stroke-width="4" stroke-linecap="round"/>
+            <path d="M100 140V170" stroke="#4F46E5" stroke-width="4" stroke-linecap="round"/>
+            <path d="M30 100H60" stroke="#4F46E5" stroke-width="4" stroke-linecap="round"/>
+            <path d="M140 100H170" stroke="#4F46E5" stroke-width="4" stroke-linecap="round"/>
+            <line x1="100" y1="100" x2="125" y2="75" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="8" fill="#1E293B"/>
+            <defs>
+              <linearGradient id="paint0_linear" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#4F46E5"/>
+                <stop offset="1" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Main Action Buttons -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Button 1: Review -->
+        <button onclick="showSection('review')" class="group text-left bg-white hover:bg-gradient-to-br hover:from-white hover:to-blue-50/50 rounded-2xl p-6 shadow-sm hover:shadow-md border border-slate-100 hover:border-blue-200 transition-all duration-300">
+          <div class="w-14 h-14 bg-blue-100 group-hover:bg-blue-200 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-4 transition-colors">
+            <i class="fa-solid fa-book-open-reader"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+            1. ทบทวนเนื้อหา
+            <i class="fa-solid fa-arrow-right text-sm text-blue-500 opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all"></i>
+          </h3>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            ศึกษาทฤษฎีการวัดแบบสากล ระบบแท่งทดลองจำลองเริ่มต้นจากศูนย์จริง และคำนวณความคลาดเคลื่อนได้อย่างแม่นยำ
+          </p>
+        </button>
+
+        <!-- Button 2: Practice -->
+        <button onclick="showSection('practice')" class="group text-left bg-white hover:bg-gradient-to-br hover:from-white hover:to-indigo-50/50 rounded-2xl p-6 shadow-sm hover:shadow-md border border-slate-100 hover:border-indigo-200 transition-all duration-300">
+          <div class="w-14 h-14 bg-indigo-100 group-hover:bg-indigo-200 text-indigo-600 rounded-xl flex items-center justify-center text-2xl mb-4 transition-colors">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+            2. ฝึกทำโจทย์
+            <i class="fa-solid fa-arrow-right text-sm text-indigo-500 opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all"></i>
+          </h3>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            ตะลุยโจทย์สุ่มวิเคราะห์การทดลองไม่จำกัดข้อ ตรวจคำตอบได้ทันทีพร้อมวิธีคิดผลต่างขีดสเกลแบบรัดกุม
+          </p>
+        </button>
+
+        <!-- Button 3: Exam -->
+        <button onclick="showSection('exam-start')" class="group text-left bg-white hover:bg-gradient-to-br hover:from-white hover:to-violet-50/50 rounded-2xl p-6 shadow-sm hover:shadow-md border border-slate-100 hover:border-violet-200 transition-all duration-300">
+          <div class="w-14 h-14 bg-violet-100 group-hover:bg-violet-200 text-violet-600 rounded-xl flex items-center justify-center text-2xl mb-4 transition-colors">
+            <i class="fa-solid fa-file-signature"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+            3. สอบเก็บคะแนน
+            <i class="fa-solid fa-arrow-right text-sm text-violet-500 opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all"></i>
+          </h3>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            ทดสอบวัดระดับจริงแบบจับเวลา 5 นาที (2 ข้อ 5 คะแนน) บันทึกสถิติเพื่อยื่นประเมินกับคุณครูได้เลย
+          </p>
+        </button>
+      </div>
+
+      <!-- Quick Tips Box -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 flex items-start gap-4">
+        <div class="text-blue-600 text-xl mt-1">
+          <i class="fa-solid fa-lightbulb"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-blue-950 mb-1">เคล็ดลับการเรียนรู้คู่ฟิสิกส์:</h4>
+          <p class="text-sm text-blue-900/80 leading-relaxed">
+            ในรายงานฟิสิกส์จริง <strong>ค่าความคลาดเคลื่อน ($\Delta x$)</strong> จะถูกปัดเศษให้เหลือเลขนัยสำคัญ <strong>1 ตัวเสมอ</strong> และเมื่อได้ตําแหน่งทศนิยมของค่าความคลาดเคลื่อนมาแล้ว เราจะต้องปัดเศษ <strong>ค่ากลาง ($x$)</strong> ให้มีทศนิยมตําแหน่งสอดคล้องกันพอดีด้วยนะ! ลองทบทวนเนื้อหาก่อนเข้าสอบล่ะ!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SECTION 2: REVIEW SYSTEM -->
+    <!-- ---------------------------------------------------- -->
+    <section id="sec-review" class="hidden space-y-6 animate-fade-in">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">📖 บทเรียนเรื่องการรายงานผลการวัด</h2>
+          <p class="text-sm text-slate-500">ทบทวนเนื้อหาและทำความเข้าใจผ่านเครื่องจำลองปฏิสัมพันธ์</p>
+        </div>
+        <button onclick="showSection('home')" class="self-start sm:self-auto px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-semibold transition duration-150 flex items-center gap-1.5">
+          <i class="fa-solid fa-chevron-left"></i> กลับหน้าแรก
+        </button>
+      </div>
+
+      <!-- Segment Tabs -->
+      <div class="flex bg-slate-200/60 p-1.5 rounded-xl max-w-md">
+        <button onclick="switchReviewTab('single')" id="btn-tab-single" class="flex-1 text-center py-2 text-sm font-bold rounded-lg transition-all duration-200 bg-white text-blue-900 shadow-sm">
+          A) วัดครั้งเดียว
+        </button>
+        <button onclick="switchReviewTab('repeated')" id="btn-tab-repeated" class="flex-1 text-center py-2 text-sm font-bold rounded-lg transition-all duration-200 text-slate-600 hover:text-slate-900">
+          B) วัดหลายครั้ง
+        </button>
+      </div>
+
+      <!-- Tab A: Single Measurement -->
+      <div id="review-tab-single" class="space-y-6">
+        <!-- Interactive Ruler Simulation Widget -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 text-blue-600">
+            <i class="fa-solid fa-sliders"></i> เครื่องทดลองจำลอง: ฝึกประมาณค่าด้วยสายตา
+          </h3>
+          <p class="text-sm text-slate-600 mb-6">
+            ลองลากสไลเดอร์เพื่อเปลี่ยนขนาดความยาวแท่งเหล็ก สังเกตการซูมและฝึกมองว่าสายตาของเราควรบันทึกทศนิยมตำแหน่งสุดท้าย (ตำแหน่งประมาณสายตา 1 ตำแหน่ง) อย่างไร โดยเริ่มต้นแนบชิดกับจุดสเกลศูนย์ (0) พอดีเป๊ะ
+          </p>
+
+          <div class="space-y-8 bg-slate-900 text-white p-6 rounded-2xl relative overflow-hidden">
+            <!-- Unified Measuring Track with Aligned 0 Start -->
+            <div class="relative h-28 bg-slate-950 rounded-2xl p-4 flex flex-col justify-end">
+              <!-- Measuring Track (contains Ruler Scale & Object) -->
+              <div class="relative w-[92%] mx-auto h-16 bg-slate-900/50 border border-slate-800 rounded">
+                <!-- Simulated Object (Solid Flat Rectangular Block starting at left-0) -->
+                <div id="sim-object" class="absolute left-0 bottom-0 h-8 bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-500 hover:to-indigo-400 transition-all duration-100 border-r-4 border-indigo-300" style="width: 60%; z-index: 10;">
+                  <span class="absolute left-2 top-2 text-[9px] text-indigo-100 font-bold tracking-wider">วัตถุตัวอย่าง (แท่งโลหะ)</span>
+                </div>
+                
+                <!-- Ruler scale display (Overlay on top of the track) -->
+                <div class="absolute inset-x-0 top-0 h-8 bg-amber-100 border-b-2 border-amber-300 flex items-end" style="z-index: 20;">
+                  <!-- Ticks from 0 to 5 cm with step 0.1 cm -->
+                  <div class="relative w-full h-full" id="ruler-scale">
+                    <!-- JS will help arrange CSS ticks here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Zoom Bubble View -->
+            <div class="grid grid-cols-1 gap-6 items-center">
+              <div class="hidden bg-slate-800 p-4 rounded-xl border border-slate-700">
+                <span class="text-xs text-amber-400 font-semibold uppercase tracking-wider block mb-2">🔭 กล้องซูมปลายเครื่องวัด (Zoom View)</span>
+                <div class="h-20 bg-amber-50 rounded-lg flex items-center relative overflow-hidden border border-amber-200">
+                  <!-- Centered Tick Lines zoomed in -->
+                  <div class="absolute inset-y-0 left-1/2 w-0.5 bg-red-500 z-10 opacity-70"></div> <!-- Center mark -->
+                  <!-- Zoom ticks dynamic display -->
+                  <div id="sim-zoom-ticks" class="absolute inset-0 flex items-end justify-center transition-all duration-100">
+                    <!-- Dynamic ticks populated by JS -->
+                  </div>
+                  <!-- Zoom tip of solid block -->
+                  <div id="sim-zoom-tip" class="absolute top-4 bottom-4 left-0 bg-indigo-500 border-r-4 border-slate-800 transition-all duration-100" style="width: 50%;"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-slate-400 mt-2">
+                  <span>ทิศทางปลายวัด ➡️</span>
+                  <span>ขีดสีแดง = จุดสิ้นสุดวัตถุจริง</span>
+                </div>
+              </div>
+
+              <!-- Controller & Explanation -->
+              <div class="space-y-4">
+                <p class="text-xs text-slate-400 bg-slate-800/70 border border-slate-700 rounded-lg p-2">แสดงผลแบบตัวเลขเรียลไทม์เพื่อให้อ่านง่ายขึ้น: ค่าอ่านชัด, ค่าประมาณ, ขีดคร่อม และค่าความคลาดเคลื่อนจะเปลี่ยนพร้อมกันทันที</p>
+                <div>
+                  <label class="block text-sm font-semibold text-slate-300 mb-1 flex justify-between">
+                    <span>ปรับความยาววัตถุ:</span>
+                    <span id="lbl-pencil-val" class="text-blue-400 font-bold text-base">3.45 cm</span>
+                  </label>
+                  <input type="range" id="pencil-slider" min="1.00" max="4.90" step="0.01" value="3.45" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                </div>
+                <div class="text-xs space-y-1 text-slate-300 bg-slate-800/80 p-3 rounded-lg border border-slate-700/60">
+                  <p>📏 <strong>ขีดสเกลล้อมรอบค่าจริง:</strong> <span id="lbl-bracket-ticks" class="text-amber-300">3.40 cm และ 3.50 cm</span></p>
+                  <p>👁️ <strong>ค่าที่อ่านได้ชัดจากสเกลล่าง:</strong> <span id="lbl-clear-val" class="text-emerald-400 font-bold">3.40 cm</span></p>
+                  <p>✏️ <strong>ค่าที่สายตาประมาณเพิ่ม (ตำแหน่งเดา):</strong> <span id="lbl-est-val" class="text-indigo-400 font-bold">0.05 cm</span></p>
+                  <p>🎯 <strong>รายงานความคลาดเคลื่อน ($\Delta x$):</strong> <span id="lbl-delta-val">$0.05 \text{ cm}$</span> (หาจากครึ่งหนึ่งของผลต่างขีดสเกลที่ล้อมรอบ)</p>
+                </div>
+              </div>
+            </div>
+            <!-- Live Equation Render Box -->
+            <div class="bg-blue-950/80 p-4 rounded-xl border border-blue-900/60 flex items-center justify-between flex-wrap gap-4">
+              <div>
+                <span class="text-xs text-blue-300 block">ผลลัพธ์การรายงานตามมาตรฐานฟิสิกส์ ($x \pm \Delta x$)</span>
+                <span id="sim-live-latex" class="text-lg font-bold text-white math-font">$3.45 \pm 0.05 \text{ cm}$</span>
+              </div>
+              <span class="bg-blue-600/30 text-blue-300 border border-blue-700 px-3 py-1 rounded text-xs font-semibold">ถูกต้องตามหลักการ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concept Card -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+            <h4 class="font-bold text-slate-800 text-lg border-b border-slate-100 pb-2 text-slate-900">หลักทฤษฎี: การวัดครั้งเดียว</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              การบันทึกค่าที่ได้จากการวัดด้วยสายตาโดยตรงผ่านสเกล นักเรียนจำเป็นต้องคาดคะเนด้วยสายตาเพิ่มขึ้นอีก 1 ตำแหน่งเสมอ และหาค่าความคลาดเคลื่อนด้วยวิธีคิดแบบสากลที่ครอบคลุมถึงกรณีสเกลไม่ปกติ
+            </p>
+            <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 space-y-2">
+              <span class="text-xs font-bold text-blue-900 block">สูตรคำนวณความคลาดเคลื่อนจากการวัดครั้งเดียว (ผลต่างขีดคร่อมล้อมรอบ):</span>
+              <p class="text-base text-blue-950 font-bold">
+                $$\Delta x = \frac{|x_{\text{ขีดบน}} - x_{\text{ขีดล่าง}}|}{2}$$
+              </p>
+              <p class="text-xs text-blue-800">โดยที่ $x_{\text{ขีดบน}}$ และ $x_{\text{ขีดล่าง}}$ คือค่าของขีดสเกลละเอียดสองขีดที่อยู่ติดกันและขนาบล้อมรอบปลายของวัตถุที่กำลังวัดเอาไว้</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+            <h4 class="font-bold text-slate-800 text-lg border-b border-slate-100 pb-2 text-slate-900">📝 ตัวอย่างการคำนวณทีละสเต็ป</h4>
+            <div class="text-sm text-slate-600 space-y-3">
+              <p><strong>โจทย์:</strong> วัดความยาวแท่งทองเหลืองได้ $1.87 \text{ cm}$ ด้วยไม้บรรทัดที่มีสเกลละเอียดขีดละ $0.1 \text{ cm}$ จงเขียนแสดงรายงานผลการวัดพร้อมความคลาดเคลื่อน</p>
+              <div class="space-y-1.5 pl-3 border-l-2 border-indigo-500">
+                <p><strong>ขั้นที่ 1:</strong> หาค่ากลางจากการทาบวัตถุเริ่มที่ 0 ได้ $x = 1.87 \text{ cm}$</p>
+                <p><strong>ขั้นที่ 2:</strong> หาขีดสเกลที่คร่อมล้อมรอบค่าที่วัดได้อยู่พอดี คือขีด $1.8 \text{ cm}$ และ $1.9 \text{ cm}$ จากนั้นคำนวณ:</p>
+                <p class="text-xs font-mono">$$\Delta x = \frac{|1.9 - 1.8|}{2} = \frac{0.1}{2} = 0.05 \text{ cm}$$</p>
+                <p><strong>ขั้นที่ 3:</strong> เช็คตำแหน่งทศนิยมของค่ากลาง ($1.87$ มี 2 ตำแหน่ง) และค่าคลาดเคลื่อน ($0.05$ มี 2 ตำแหน่ง) ซึ่งสอดคล้องกันอย่างถูกต้อง</p>
+              </div>
+              <p class="text-slate-800 font-bold bg-indigo-50 p-2.5 rounded text-center">
+                คำตอบ: $1.87 \pm 0.05 \text{ cm}$
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Memorize & Warning Boxes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-100 flex gap-3">
+            <i class="fa-solid fa-bookmark text-emerald-600 text-lg mt-0.5"></i>
+            <div>
+              <h5 class="font-bold text-emerald-950 mb-1">กล่อง "ข้อควรจำ" 💡</h5>
+              <p class="text-xs text-emerald-900/80 leading-relaxed">
+                การตั้งสูตรแบบ $\Delta x = \frac{|x_{\text{ขีดบน}} - x_{\text{ขีดล่าง}}|}{2}$ นั้นมีความรัดกุมมากที่สุด เพราะไม่ว่าเครื่องมือวัดจะมีสเกลที่ลดหลั่นแบบไม่สม่ำเสมอ หรือมีข้อสอบที่เจตนาลวงค่าสเกลละเอียดยังไง หากเราหาขีดสเกลที่ "คร่อมล้อมรอบ" ปลายวัตถุมาหักลบกันแล้วหารด้วยสอง ก็จะไม่มีวันคำนวณพลาดแน่นอนครับ!
+              </p>
+            </div>
+          </div>
+          <div class="bg-rose-50 rounded-xl p-5 border border-rose-100 flex gap-3">
+            <i class="fa-solid fa-triangle-exclamation text-rose-600 text-lg mt-0.5"></i>
+            <div>
+              <h5 class="font-bold text-rose-950 mb-1">กล่อง "จุดที่นักเรียนมักพลาด" ⚠️</h5>
+              <p class="text-xs text-rose-900/80 leading-relaxed">
+                นักเรียนมักจะทาบวัตถุไม่ตรงจุดศูนย์ (0) ของเครื่องมือวัดในการทำการทดลองจริง ซึ่งนำไปสู่ความคลาดเคลื่อนอย่างร้ายแรง (Zero Error) ดังนั้นต้องตรวจสอบให้แน่ใจเสมอว่าจุดเริ่มต้นทับเลข 0 พอดี และตัวเลขค่ากลางกับความคลาดเคลื่อนต้องมีจำนวนตำแหน่งทศนิยมที่สอดคล้องสากล เช่น $5.40 \pm 0.05$ (ถูกต้อง) ห้ามเขียนเป็น $5.4 \pm 0.05$ เด็ดขาด
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab B: Repeated Measurements -->
+      <div id="review-tab-repeated" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+          <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 text-indigo-600 pb-2 border-b border-slate-100">
+            <i class="fa-solid fa-chart-line"></i> การวัดหลายครั้งเพื่อหาค่าเฉลี่ยและพิสัย
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            เมื่อทำการทดลองแบบเดิมซ้ำๆ หลายครั้งเพื่อความถูกต้อง เราจะนำข้อมูลเหล่านั้นมาสรุปผลโดยการคำนวณหาค่าเฉลี่ยและคำนวณค่าคลาดเคลื่อนจากผลต่างของค่าสูงสุดและต่ำสุด (ครึ่งหนึ่งของพิสัย)
+          </p>
+
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/60 space-y-4">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block">📐 สมการและขั้นตอนการสรุปผลการวัดหลายครั้ง</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-xl border border-slate-200">
+                <span class="text-xs text-slate-400 block mb-1">1. หาค่าเฉลี่ย ($\bar{x}$)</span>
+                <p class="text-base text-slate-800 font-bold">
+                  $$\bar{x} = \frac{\sum_{i=1}^{N} x_i}{N}$$
+                </p>
+                <span class="text-[11px] text-slate-500 block mt-1">นำผลรวมข้อมูลทั้งหมดหารด้วยจำนวนครั้งการวัด</span>
+              </div>
+              <div class="bg-white p-4 rounded-xl border border-slate-200">
+                <span class="text-xs text-slate-400 block mb-1">2. หาค่าความคลาดเคลื่อนของค่าเฉลี่ย ($\Delta \bar{x}$)</span>
+                <p class="text-base text-slate-800 font-bold">
+                  $$\Delta \bar{x} = \frac{x_{\max} - x_{\min}}{2}$$
+                </p>
+                <span class="text-[11px] text-slate-500 block mt-1">ครึ่งหนึ่งของพิสัย (ค่ามากที่สุดลบค่าน้อยที่สุด หารสอง)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demonstration Process Step Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+          <h4 class="font-bold text-slate-800 text-base">🔍 แผนผังสาธิตการปัดเลขอย่างละเอียด (Step-by-Step)</h4>
+          
+          <div class="relative pl-6 border-l-2 border-indigo-600 space-y-6 text-sm text-slate-600">
+            <!-- Step 1 -->
+            <div class="relative">
+              <div class="absolute -left-[31px] top-1 bg-indigo-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold">1</div>
+              <h5 class="font-bold text-slate-800 mb-1">คัดแยกและกำจัดข้อมูลที่ผิดปกติ (Outliers)</h5>
+              <p class="text-xs text-slate-500">
+                หากมีข้อมูลบางตัวมีค่าโดดหลุดกลุ่มอย่างเห็นได้ชัด เช่น วัดได้ประมาณ $1.8$ แต่วัดครั้งหนึ่งได้ $5.89$ ให้ตัดตัวนี้ทิ้งทันทีเพราะเป็นความผิดพลาดของระบบหรือการวัด (Human Error)
+              </p>
+            </div>
+            <!-- Step 2 -->
+            <div class="relative">
+              <div class="absolute -left-[31px] top-1 bg-indigo-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold">2</div>
+              <h5 class="font-bold text-slate-800 mb-1">คำนวณค่าเฉลี่ยและครึ่งหนึ่งของพิสัย</h5>
+              <p class="text-xs text-slate-500">
+                คำนวณ $\bar{x}$ และ $\Delta \bar{x}$ ดิบเก็บไว้โดยยังไม่ต้องปัดทศนิยม
+              </p>
+            </div>
+            <!-- Step 3 -->
+            <div class="relative">
+              <div class="absolute -left-[31px] top-1 bg-indigo-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold">3</div>
+              <h5 class="font-bold text-slate-800 mb-1">ปรับแต่งเลขนัยสำคัญของค่าความคลาดเคลื่อนก่อน</h5>
+              <div class="bg-amber-50 text-amber-900 p-3 rounded-lg border border-amber-100 text-xs mt-1 leading-relaxed">
+                ⚠️ <strong>กติกาสากล:</strong> ค่าความคลาดเคลื่อน $\Delta \bar{x}$ ต้องถูกปัดให้มี <strong>เลขนัยสำคัญ 1 ตัวเท่านั้น</strong> และกรณีเลขถัดไปเป็น 5 พอดี ให้ใช้หลัก <strong>ปัดครึ่งให้เป็นเลขคู่</strong> (เช่น $0.035 \rightarrow 0.04$, $0.025 \rightarrow 0.02$)
+              </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="relative">
+              <div class="absolute -left-[31px] top-1 bg-indigo-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold">4</div>
+              <h5 class="font-bold text-slate-800 mb-1">ปรับทศนิยมของค่าเฉลี่ยกลางให้สอดคล้องกัน</h5>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                ปรับตำแหน่งทศนิยมของค่ากลาง $\bar{x}$ ให้มีตำแหน่งทศนิยม <strong>เท่ากันพอดี</strong> กับตำแหน่งทศนิยมของค่าความคลาดเคลื่อนที่เราปัดเสร็จแล้วในขั้นตอนที่ 3
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep-dive Example Table -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+          <h4 class="font-bold text-slate-800 text-base">📊 ตัวอย่างการแสดงผลด้วยตารางวิเคราะห์จริง</h4>
+          <p class="text-xs text-slate-500">ข้อมูลความหนาของแผ่นโลหะวัด 7 ครั้ง: $1.86, 1.85, 1.83, 1.85, 1.87, 1.81, 5.89 \text{ cm}$</p>
+          
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-sm text-left text-slate-500">
+              <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                <tr>
+                  <th scope="col" class="px-4 py-3">ขั้นตอน</th>
+                  <th scope="col" class="px-4 py-3">การคำนวณเชิงลึก</th>
+                  <th scope="col" class="px-4 py-3">ผลลัพธ์ที่ได้</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr>
+                  <td class="px-4 py-3.5 font-semibold text-slate-900">1. คัดกรองข้อมูล</td>
+                  <td class="px-4 py-3.5">ตัดค่าโดดเด่นผิดปกติ $5.89 \text{ cm}$ ออก</td>
+                  <td class="px-4 py-3.5 text-emerald-600 font-medium">เหลือข้อมูล 6 ค่า</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3.5 font-semibold text-slate-900">2. หาค่าเฉลี่ยกลาง</td>
+                  <td class="px-4 py-3.5">$$\bar{x} = \frac{1.86+1.85+1.83+1.85+1.87+1.81}{6} = 1.845$$</td>
+                  <td class="px-4 py-3.5 text-slate-800">$1.845 \text{ cm}$</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3.5 font-semibold text-slate-900">3. หาความคลาดเคลื่อนดิบ</td>
+                  <td class="px-4 py-3.5">$$\Delta \bar{x}_{\text{ดิบ}} = \frac{1.87 - 1.81}{2} = 0.03$$</td>
+                  <td class="px-4 py-3.5 text-slate-800">$0.03 \text{ cm}$</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3.5 font-semibold text-slate-900">4. ปรับเลขนัยสำคัญ</td>
+                  <td class="px-4 py-3.5">
+                    $\Delta \bar{x} = 0.03$ (มีเลขนัยสำคัญ 1 ตัวอยู่แล้ว, ทศนิยม 2 ตำแหน่ง)<br>
+                    ปัดค่าเฉลี่ยกลางให้เหลือทศนิยม 2 ตำแหน่งด้วยหลักปัดครึ่งให้เป็นเลขคู่: $1.845 \rightarrow 1.84$
+                  </td>
+                  <td class="px-4 py-3.5 text-blue-600 font-bold">$1.84 \pm 0.03 \text{ cm}$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SECTION 3: PRACTICE MODE -->
+    <!-- ---------------------------------------------------- -->
+    <section id="sec-practice" class="hidden space-y-6 animate-fade-in">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">🧠 ตะลุยฝึกโจทย์ฟิสิกส์ ม.4</h2>
+          <p class="text-sm text-slate-500">ท้าทายตนเองด้วยโจทย์สุ่มวิเคราะห์ความคลาดเคลื่อนและคำนวณจริง</p>
+        </div>
+        <button onclick="showSection('home')" class="self-start sm:self-auto px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-semibold transition duration-150 flex items-center gap-1.5">
+          <i class="fa-solid fa-chevron-left"></i> กลับหน้าแรก
+        </button>
+      </div>
+
+      <!-- Mode Selector -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <button onclick="startPracticeMode('single')" id="btn-prac-single" class="p-4 bg-white hover:bg-blue-50 text-slate-800 rounded-xl border border-slate-200 flex items-center gap-4 transition text-left">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-xl font-bold">A</div>
+          <div>
+            <h4 class="font-bold">ฝึกโจทย์: การวัดครั้งเดียว</h4>
+            <p class="text-xs text-slate-500">สุ่มสเกลเครื่องมือ และคิดความคลาดเคลื่อนจากขีดคร่อมล้อมรอบ</p>
+          </div>
+        </button>
+        <button onclick="startPracticeMode('repeated')" id="btn-prac-repeated" class="p-4 bg-white hover:bg-indigo-50 text-slate-800 rounded-xl border border-slate-200 flex items-center gap-4 transition text-left">
+          <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 text-xl font-bold">B</div>
+          <div>
+            <h4 class="font-bold">ฝึกโจทย์: การวัดหลายครั้ง</h4>
+            <p class="text-xs text-slate-500">สุ่มชุดข้อมูล หาความคลาดเคลื่อน ปัดเศษ และกรอง Outliers</p>
+          </div>
+        </button>
+      </div>
+
+      <!-- Live Practice Container -->
+      <div id="practice-arena" class="hidden bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 space-y-6">
+        <div class="flex items-center justify-between">
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold" id="prac-badge-mode">
+            โหมดการวัดครั้งเดียว
+          </span>
+          <button onclick="regeneratePractice()" class="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
+            <i class="fa-solid fa-rotate"></i> สุ่มโจทย์ใหม่
+          </button>
+        </div>
+
+        <!-- Question Display Card -->
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+          <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">📋 โจทย์ฟิสิกส์สุ่ม:</span>
+          <p id="prac-question-text" class="text-base text-slate-800 font-medium leading-relaxed">
+            - กำลังเจนโจทย์ -
+          </p>
+          <div id="prac-single-figure" class="hidden mt-4 bg-white border border-slate-200 rounded-xl p-3"></div>
+        </div>
+
+        <!-- User Answer Inputs Form -->
+        <div class="space-y-4">
+          <h4 class="font-bold text-sm text-slate-700">✍️ กรอกคำตอบของคุณ:</h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">ค่ากลาง $x$ (ใส่เฉพาะตัวเลข):</label>
+              <input type="text" inputmode="decimal" autocomplete="off" id="prac-input-mean" placeholder="ตัวอย่าง: 1.84" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">ค่าความคลาดเคลื่อน $\Delta x$ (ใส่เฉพาะตัวเลข):</label>
+              <input type="text" inputmode="decimal" autocomplete="off" id="prac-input-unc" placeholder="ตัวอย่าง: 0.03" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <button onclick="checkPracticeAnswer()" class="w-full sm:w-auto sm:flex-1 md:flex-none px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-sm transition duration-150">
+              ตรวจคำตอบ
+            </button>
+            <button onclick="regeneratePractice()" class="w-full sm:w-auto px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl transition duration-150">
+              ข้าม / สุ่มโจทย์ใหม่
+            </button>
+          </div>
+        </div>
+
+        <!-- Feedback Box -->
+        <div id="prac-feedback" class="hidden p-5 rounded-2xl border transition-all duration-300">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Explanations Block (Shows after check) -->
+        <div id="prac-explanation-box" class="hidden space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-200">
+          <h5 class="font-bold text-slate-800 text-sm border-b border-slate-200 pb-2">✏️ วิธีคิดและเฉลยละเอียดทีละขั้นตอน:</h5>
+          <div id="prac-explanation-text" class="text-sm text-slate-600 space-y-3 math-font leading-relaxed">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SECTION 4: EXAM START SCREEN -->
+    <!-- ---------------------------------------------------- -->
+    <section id="sec-exam-start" class="hidden max-w-xl mx-auto space-y-6 animate-fade-in">
+      <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100 space-y-6">
+        <div class="text-center space-y-2">
+          <div class="w-16 h-16 bg-violet-100 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mx-auto">
+            <i class="fa-solid fa-file-pen"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-800">ระบบสอบเก็บคะแนน ม.4</h2>
+          <p class="text-sm text-slate-500">เรื่อง: การสรุปรายงานผลการทดลองและการวัด</p>
+        </div>
+
+        <div class="bg-amber-50 rounded-xl p-4 border border-amber-100 space-y-2 text-xs md:text-sm text-amber-900/90 leading-relaxed">
+          <h4 class="font-bold text-amber-950 flex items-center gap-1">
+            <i class="fa-solid fa-circle-info"></i> กติกาการสอบเก็บคะแนน:
+          </h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>มีทั้งหมด <strong>2 ข้อ</strong> คะแนนรวมเต็ม <strong>5 คะแนน</strong> (ข้อ 1 = 2 คะแนน, ข้อ 2 = 3 คะแนน)</li>
+            <li>มีเวลาจำกัดในการทำข้อสอบ <strong>5 นาที</strong> (มีตัวจับเวลาแสดงบนจอ)</li>
+            <li>หากหมดเวลา ระบบจะส่งคำตอบทันทีตามข้อมูลที่มีการกรอกไว้ล่าสุด</li>
+            <li>ระบบจะบันทึกผลการสอบล่าสุดของคุณไว้ในบราวเซอร์นี้เพื่อใช้ดูประวัติย้อนหลัง</li>
+          </ul>
+        </div>
+
+        <!-- Student Info Form -->
+        <div class="space-y-4 pt-2">
+          <h4 class="font-bold text-sm text-slate-700">กรอกข้อมูลผู้เข้าสอบ:</h4>
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1">ชื่อ-นามสกุล:</label>
+              <input type="text" id="exam-student-name" placeholder="เด็กชายสมศักดิ์ รักเรียน" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:ring-2 focus:ring-violet-500 focus:outline-none text-sm">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1">ชั้น ม.4 / ห้อง:</label>
+                <input type="text" id="exam-student-class" placeholder="4/1" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:ring-2 focus:ring-violet-500 focus:outline-none text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1">เลขที่:</label>
+                <input type="number" id="exam-student-no" placeholder="25" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:ring-2 focus:ring-violet-500 focus:outline-none text-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-3 pt-2">
+          <button onclick="showSection('home')" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl transition text-center text-sm">
+            กลับหน้าแรก
+          </button>
+          <button onclick="startExamProcess()" class="flex-[2] py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl shadow-md transition text-center text-sm">
+            เริ่มทำข้อสอบ <i class="fa-solid fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SECTION 5: LIVE EXAM SCREEN -->
+    <!-- ---------------------------------------------------- -->
+    <section id="sec-exam-live" class="hidden space-y-6 relative animate-fade-in">
+      <!-- Sticky Sticky Timer bar -->
+      <div class="sticky top-2 z-30 bg-slate-900 text-white px-3 md:px-4 py-3 rounded-xl shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-2 border border-slate-700">
+        <div class="flex items-center gap-2 min-w-0">
+          <i class="fa-solid fa-user-pen text-indigo-400"></i>
+          <span class="text-xs md:text-sm text-slate-300 font-medium truncate">
+            ผู้เข้าสอบ: <strong class="text-white" id="lbl-exam-user-info">-</strong>
+          </span>
+        </div>
+        <div class="flex items-center gap-2 font-bold text-rose-400 text-base md:text-lg">
+          <i class="fa-solid fa-clock animate-pulse"></i>
+          <span>เวลาที่เหลือ: <span id="exam-timer-display" class="font-mono">05:00</span></span>
+        </div>
+      </div>
+
+      <!-- Exam Q1 Container -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <span class="text-sm font-bold text-slate-800">📝 ข้อที่ 1: การวัดครั้งเดียว</span>
+          <span class="bg-violet-100 text-violet-800 px-2.5 py-0.5 rounded text-xs font-semibold">2 คะแนน</span>
+        </div>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed font-medium" id="exam-q1-text">
+          - กำลังดึงข้อสอบ -
+        </p>
+        <div id="exam-q1-figure" class="bg-slate-50 border border-slate-200 rounded-xl p-3"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1">ค่ากลาง $x$ ที่คุณรายงาน:</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="exam-q1-mean" placeholder="กรอกตัวเลขทศนิยม" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1">ค่าความคลาดเคลื่อน $\Delta x$:</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="exam-q1-unc" placeholder="กรอกตัวเลขทศนิยม" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm">
+          </div>
+        </div>
+      </div>
+
+      <!-- Exam Q2 Container -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <span class="text-sm font-bold text-slate-800">📝 ข้อที่ 2: การวัดหลายครั้ง</span>
+          <span class="bg-violet-100 text-violet-800 px-2.5 py-0.5 rounded text-xs font-semibold">3 คะแนน</span>
+        </div>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed font-medium" id="exam-q2-text">
+          - กำลังดึงข้อสอบ -
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1">ค่ากลาง $\bar{x}$ ที่คุณรายงาน:</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="exam-q2-mean" placeholder="กรอกตัวเลขทศนิยม" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1">ค่าความคลาดเคลื่อน $\Delta \bar{x}$:</label>
+            <input type="text" inputmode="decimal" autocomplete="off" id="exam-q2-unc" placeholder="กรอกตัวเลขทศนิยม" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm">
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button inside Exam -->
+      <div class="flex gap-4">
+        <button onclick="confirmSubmitExam()" class="flex-1 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition text-center">
+          <i class="fa-solid fa-paper-plane mr-1"></i> ส่งข้อสอบเก็บคะแนน
+        </button>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SECTION 6: EXAM RESULTS SCREEN -->
+    <!-- ---------------------------------------------------- -->
+    <section id="sec-exam-result" class="hidden max-w-3xl mx-auto space-y-6 animate-fade-in">
+      <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100 space-y-6">
+        <div class="text-center space-y-2">
+          <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+            รายงานผลการประเมินคะแนนสอบ
+          </span>
+          <h2 class="text-2xl font-bold text-slate-800">ประกาศผลสอบเก็บคะแนนฟิสิกส์ ม.4</h2>
+        </div>
+
+        <!-- Score Circle Visualization -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col md:flex-row items-center justify-around gap-6">
+          <div class="text-center space-y-1">
+            <h4 class="text-slate-500 text-xs font-bold uppercase">ผู้รับการทดสอบ</h4>
+            <p id="lbl-res-student-name" class="text-lg font-bold text-slate-800">-</p>
+            <p id="lbl-res-student-meta" class="text-xs text-slate-400">ชั้น ม.4 เลขที่ -</p>
+          </div>
+
+          <!-- Circular score display -->
+          <div class="relative w-32 h-32 flex items-center justify-center">
+            <svg class="absolute inset-0 w-full h-full transform -rotate-90">
+              <circle cx="64" cy="64" r="50" stroke="#e2e8f0" stroke-width="10" fill="transparent" />
+              <circle cx="64" cy="64" r="50" id="res-circle-progress" stroke="#4F46E5" stroke-dasharray="314" stroke-dashoffset="314" stroke-width="10" fill="transparent" stroke-linecap="round" class="transition-all duration-1000" />
+            </svg>
+            <div class="text-center">
+              <span id="lbl-res-total-score" class="text-3xl font-extrabold text-slate-800">0</span>
+              <span class="text-slate-400 text-sm font-semibold block">/ 5 คะแนน</span>
+            </div>
+          </div>
+
+          <div class="text-center md:text-left space-y-2 max-w-sm bg-rose-50 border-2 border-rose-300 rounded-2xl p-4 shadow-sm">
+            <h4 class="text-rose-700 text-sm md:text-base font-extrabold uppercase tracking-wide flex items-center justify-center md:justify-start gap-2">
+              <i class="fa-solid fa-triangle-exclamation"></i> การวิเคราะห์ผลตอบสนอง
+            </h4>
+            <p id="lbl-res-time-elapsed" class="text-base md:text-lg font-extrabold text-rose-950">ใช้เวลาไปทั้งหมด: -</p>
+            <p id="lbl-res-finished-at" class="text-base md:text-lg font-extrabold text-rose-700">ส่งข้อสอบเมื่อ: -</p>
+            <p id="lbl-res-badge-feedback" class="text-xs bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-100 font-semibold leading-relaxed">
+              - รอการคำนวณ -
+            </p>
+          </div>
+        </div>
+
+        <!-- Diagnostic Table -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-slate-800 text-sm">📊 รายละเอียดแยกรายข้อ:</h4>
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-sm text-left text-slate-500">
+              <thead class="text-xs text-slate-700 bg-slate-100 uppercase">
+                <tr>
+                  <th scope="col" class="px-4 py-3">ข้อที่</th>
+                  <th scope="col" class="px-4 py-3">เรื่อง</th>
+                  <th scope="col" class="px-4 py-3 text-center">คะแนนเต็ม</th>
+                  <th scope="col" class="px-4 py-3 text-center">คะแนนที่คุณได้</th>
+                  <th scope="col" class="px-4 py-3 text-center">ผลการประเมิน</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr>
+                  <td class="px-4 py-3 font-semibold text-slate-900">1</td>
+                  <td class="px-4 py-3">การรายงานผลการวัดแบบครั้งเดียว</td>
+                  <td class="px-4 py-3 text-center font-bold">2.0</td>
+                  <td class="px-4 py-3 text-center font-bold text-indigo-600" id="lbl-res-q1-score">0.0</td>
+                  <td class="px-4 py-3 text-center" id="lbl-res-q1-status">
+                    <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2 py-0.5 rounded">ผิด</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-semibold text-slate-900">2</td>
+                  <td class="px-4 py-3">การรายงานผลการวัดหลายครั้ง</td>
+                  <td class="px-4 py-3 text-center font-bold">3.0</td>
+                  <td class="px-4 py-3 text-center font-bold text-indigo-600" id="lbl-res-q2-score">0.0</td>
+                  <td class="px-4 py-3 text-center" id="lbl-res-q2-status">
+                    <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2 py-0.5 rounded">ผิด</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Detailed Solutions for Exam -->
+        <div class="space-y-4 border-t border-slate-100 pt-6">
+          <button onclick="toggleExamSolutionBox()" id="btn-toggle-solutions" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition text-sm flex items-center justify-center gap-1">
+            <i class="fa-solid fa-file-invoice"></i> <span id="lbl-toggle-solution-text">ดูเฉลยละเอียดของข้อที่คุณได้รับ</span>
+          </button>
+
+          <div id="exam-solution-box" class="hidden space-y-6">
+            <div class="bg-indigo-50/50 rounded-2xl p-5 border border-indigo-100 space-y-4">
+              <h4 class="font-bold text-indigo-950 text-base">🔑 เฉลยละเอียด ข้อ 1 (การวัดครั้งเดียว)</h4>
+              <p class="text-xs text-indigo-900 font-medium" id="lbl-exam-sol-q1-text">-</p>
+              <div class="bg-white p-4 rounded-xl border border-indigo-100 text-xs md:text-sm text-slate-700 space-y-3 math-font" id="lbl-exam-sol-q1-detail">
+                <!-- Solutions injected -->
+              </div>
+            </div>
+
+            <div class="bg-violet-50/50 rounded-2xl p-5 border border-violet-100 space-y-4">
+              <h4 class="font-bold text-violet-950 text-base">🔑 เฉลยละเอียด ข้อ 2 (การวัดหลายครั้ง)</h4>
+              <p class="text-xs text-violet-900 font-medium" id="lbl-exam-sol-q2-text">-</p>
+              <div class="bg-white p-4 rounded-xl border border-violet-100 text-xs md:text-sm text-slate-700 space-y-3 math-font" id="lbl-exam-sol-q2-detail">
+                <!-- Solutions injected -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Grid after Exam -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <button onclick="showSection('exam-start')" class="py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition text-center text-sm">
+            <i class="fa-solid fa-rotate-right mr-1"></i> สอบใหม่อีกครั้ง
+          </button>
+          <button onclick="showSection('practice')" class="py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl transition text-center text-sm">
+            <i class="fa-solid fa-dumbbell mr-1"></i> ไปฝึกโจทย์เพิ่ม
+          </button>
+          <button onclick="showSection('home')" class="py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition text-center text-sm">
+            <i class="fa-solid fa-house mr-1"></i> กลับหน้าแรก
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Custom Alert Modal Container (to prevent browser popups) -->
+  <div id="modal-alert" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 max-w-sm w-full text-center space-y-4 transform transition-all duration-300 scale-95 opacity-0" id="modal-alert-card">
+      <div class="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl" id="modal-alert-icon">
+        <i class="fa-solid fa-circle-exclamation"></i>
+      </div>
+      <div class="space-y-1">
+        <h3 class="font-bold text-lg text-slate-800" id="modal-alert-title">แจ้งเตือน</h3>
+        <p class="text-sm text-slate-500 leading-relaxed" id="modal-alert-msg">ข้อความชี้แจง</p>
+      </div>
+      <button onclick="closeAlertModal()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-sm text-sm transition">
+        ตกลง / เข้าใจแล้ว
+      </button>
+    </div>
+  </div>
+
+  <!-- Measurement Figure Zoom Modal -->
+  <div id="measurement-zoom-modal" onclick="if (event.target.id === 'measurement-zoom-modal') closeMeasurementZoom()" class="hidden fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-sm p-3 md:p-6">
+    <div class="h-full max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl border border-white/40 flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-200">
+        <div>
+          <h3 class="font-bold text-slate-800 text-sm md:text-base">ภาพสเกลแบบขยาย</h3>
+          <p class="text-xs text-slate-500">เลื่อนซ้าย-ขวาเพื่ออ่านตัวเลขบนมือถือ</p>
+        </div>
+        <button onclick="closeMeasurementZoom()" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition" aria-label="Close zoom">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="measurement-zoom-stage" class="flex-1 overflow-auto p-3 md:p-6 bg-slate-50"></div>
+    </div>
+  </div>
+
+    <!-- Footer block -->
+  <footer class="bg-slate-950 text-slate-300 py-8 border-t border-slate-900 text-center text-sm space-y-3 px-4">
+    <p class="font-semibold">รายวิชา ฟิสิกส์ 1 รหัสวิชา ว31201 โรงเรียนห้องสอนศึกษา ในพระอุปถัมภ์ฯ</p>
+    <div class="inline-flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-full px-4 py-2">
+      <span class="text-cyan-300 font-bold uppercase tracking-wider text-xs">Dev Badge</span>
+      <span class="text-white font-semibold">: นายนพพร สมบูรณ์ชัย</span>
+    </div>
+    <p class="text-slate-500 text-xs">© 2026 Interactive Physics Learning Portal</p>
+  </footer>
+
+  <!-- ---------------------------------------------------- -->
+  <!-- JAVASCRIPT SYSTEM CODE -->
+  <!-- ---------------------------------------------------- -->
+  <script>
+    // System State Variables
+    let currentSection = 'home';
+    let currentPracticeMode = null; // 'single' or 'repeated'
+    let currentPracticeData = null; // Stored question data
+    let currentExamData = null; // Stored randomized exam data
+    let examTimerInterval = null;
+    let examTimeRemaining = 300; // 5 minutes (300 seconds)
+    const EXAM_DURATION_SECONDS = 300;
+    const EXAM_STATE_KEY = 'active_exam_session';
+    let examStartTimestamp = null;
+    let examDeadlineTimestamp = null;
+    let examIsActive = false;
+    let examSubmissionInProgress = false;
+    let examStudentInfo = {};
+    let examExitGuardEnabled = false;
+    let examTouchStartY = 0;
+
+    function formatExamTime(seconds) {
+      const safeSeconds = Math.max(0, Math.floor(seconds));
+      const minutes = Math.floor(safeSeconds / 60).toString().padStart(2, '0');
+      const remainingSeconds = (safeSeconds % 60).toString().padStart(2, '0');
+      return `${minutes}:${remainingSeconds}`;
+    }
+
+    function formatThaiDateTimeBuddhistEra(date = new Date()) {
+      return new Intl.DateTimeFormat('th-TH-u-ca-buddhist', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).format(date);
+    }
+
+    function getCurrentExamRemainingSeconds() {
+      if (!examDeadlineTimestamp) {
+        return examTimeRemaining;
+      }
+      return Math.max(0, Math.ceil((examDeadlineTimestamp - Date.now()) / 1000));
+    }
+
+    function getCurrentExamAnswers() {
+      return {
+        q1Mean: document.getElementById('exam-q1-mean').value,
+        q1Unc: document.getElementById('exam-q1-unc').value,
+        q2Mean: document.getElementById('exam-q2-mean').value,
+        q2Unc: document.getElementById('exam-q2-unc').value
+      };
+    }
+
+    function restoreExamAnswers(answers) {
+      if (!answers) return;
+      document.getElementById('exam-q1-mean').value = answers.q1Mean || '';
+      document.getElementById('exam-q1-unc').value = answers.q1Unc || '';
+      document.getElementById('exam-q2-mean').value = answers.q2Mean || '';
+      document.getElementById('exam-q2-unc').value = answers.q2Unc || '';
+    }
+
+    function persistExamSession() {
+      if (!examIsActive || !currentExamData || !examStartTimestamp || !examDeadlineTimestamp) {
+        return;
+      }
+
+      const payload = {
+        examData: currentExamData,
+        studentInfo: examStudentInfo,
+        examStartTimestamp,
+        examDeadlineTimestamp,
+        answers: getCurrentExamAnswers()
+      };
+
+      sessionStorage.setItem(EXAM_STATE_KEY, JSON.stringify(payload));
+    }
+
+    function clearExamSession() {
+      sessionStorage.removeItem(EXAM_STATE_KEY);
+    }
+
+    function stopExamExitGuard() {
+      if (!examExitGuardEnabled) return;
+      window.removeEventListener('beforeunload', handleExamBeforeUnload);
+      window.removeEventListener('popstate', handleExamPopState);
+      window.removeEventListener('keydown', handleExamKeydown, true);
+      window.removeEventListener('touchstart', handleExamTouchStart);
+      window.removeEventListener('touchmove', handleExamTouchMove);
+      document.documentElement.classList.remove('exam-locked');
+      document.body.classList.remove('exam-locked');
+      examExitGuardEnabled = false;
+    }
+
+    function startExamExitGuard() {
+      if (examExitGuardEnabled) return;
+      window.addEventListener('beforeunload', handleExamBeforeUnload);
+      window.addEventListener('popstate', handleExamPopState);
+      window.addEventListener('keydown', handleExamKeydown, true);
+      window.addEventListener('touchstart', handleExamTouchStart, { passive: true });
+      window.addEventListener('touchmove', handleExamTouchMove, { passive: false });
+      document.documentElement.classList.add('exam-locked');
+      document.body.classList.add('exam-locked');
+      examExitGuardEnabled = true;
+    }
+
+    function handleExamBeforeUnload(event) {
+      if (!examIsActive) return;
+      persistExamSession();
+      event.preventDefault();
+      event.returnValue = '';
+      return '';
+    }
+
+    function handleExamPopState() {
+      if (!examIsActive) return;
+      history.pushState({ examLock: true }, '', location.href);
+      triggerAlert("กำลังสอบอยู่", "ระบบล็อกการย้อนกลับไว้ระหว่างทำข้อสอบ เพื่อป้องกันการหลุดจากการสอบโดยไม่ตั้งใจ", "fa-ban", "bg-amber-100 text-amber-600");
+      showSection('exam-live');
+    }
+
+    function handleExamKeydown(event) {
+      if (!examIsActive) return;
+      const key = event.key.toLowerCase();
+      const blocked = event.key === 'F5' || ((event.ctrlKey || event.metaKey) && key === 'r') || (event.altKey && key === 'arrowleft');
+
+      if (blocked) {
+        event.preventDefault();
+        event.stopPropagation();
+        triggerAlert("กำลังสอบอยู่", "ระบบปิดการรีเฟรชและย้อนหน้าไว้ชั่วคราว เพื่อให้เวลาสอบเดินต่อเนื่องตลอด 5 นาที", "fa-lock", "bg-amber-100 text-amber-600");
+      }
+    }
+
+    function handleExamTouchStart(event) {
+      if (!examIsActive || !event.touches || event.touches.length !== 1) return;
+      examTouchStartY = event.touches[0].clientY;
+    }
+
+    function handleExamTouchMove(event) {
+      if (!examIsActive || !event.touches || event.touches.length !== 1) return;
+
+      const currentY = event.touches[0].clientY;
+      const pullingDownFromTop = window.scrollY <= 0 && currentY > examTouchStartY + 8;
+
+      if (pullingDownFromTop) {
+        event.preventDefault();
+      }
+    }
+
+    function startExamTimer() {
+      clearInterval(examTimerInterval);
+
+      const updateTimer = () => {
+        if (!examIsActive) return;
+
+        examTimeRemaining = getCurrentExamRemainingSeconds();
+        document.getElementById('exam-timer-display').innerText = formatExamTime(examTimeRemaining);
+
+        if (examTimeRemaining < 60) {
+          document.getElementById('exam-timer-display').classList.add('text-rose-500');
+        } else {
+          document.getElementById('exam-timer-display').classList.remove('text-rose-500');
+        }
+
+        persistExamSession();
+
+        if (examTimeRemaining <= 0) {
+          clearInterval(examTimerInterval);
+          examTimeRemaining = 0;
+          document.getElementById('exam-timer-display').innerText = "00:00";
+          triggerAlert("หมดเวลาแล้ว!", "เวลาสอบ 5 นาทีของคุณได้สิ้นสุดลงแล้ว ระบบจะส่งข้อสอบและสรุปประเมินให้ทันทีอัตโนมัติ", "fa-hourglass-end", "bg-rose-100 text-rose-600");
+          submitExam(true);
+        }
+      };
+
+      updateTimer();
+      examTimerInterval = setInterval(updateTimer, 250);
+    }
+
+    function initializeExamSession(examData, studentInfo) {
+      currentExamData = examData;
+      examStudentInfo = studentInfo;
+      examStartTimestamp = Date.now();
+      examDeadlineTimestamp = examStartTimestamp + (EXAM_DURATION_SECONDS * 1000);
+      examTimeRemaining = EXAM_DURATION_SECONDS;
+      examIsActive = true;
+      examSubmissionInProgress = false;
+      startExamExitGuard();
+      history.pushState({ examLock: true }, '', location.href);
+      persistExamSession();
+      startExamTimer();
+    }
+
+    function restoreActiveExamSession() {
+      const saved = sessionStorage.getItem(EXAM_STATE_KEY);
+      if (!saved) return false;
+
+      try {
+        const parsed = JSON.parse(saved);
+        if (!parsed || !parsed.examData || !parsed.studentInfo || !parsed.examDeadlineTimestamp) {
+          return false;
+        }
+
+        currentExamData = parsed.examData;
+        examStudentInfo = parsed.studentInfo;
+        examStartTimestamp = parsed.examStartTimestamp || (parsed.examDeadlineTimestamp - (EXAM_DURATION_SECONDS * 1000));
+        examDeadlineTimestamp = parsed.examDeadlineTimestamp;
+        examIsActive = true;
+        examSubmissionInProgress = false;
+
+        document.getElementById('lbl-exam-user-info').innerText = `${examStudentInfo.name} (ม.4/${examStudentInfo.class} เลขที่ ${examStudentInfo.number})`;
+        document.getElementById('exam-q1-text').innerText = `ดูภาพสเกลด้านล่างแล้วรายงานผลการวัดในรูป x ± Δx (หน่วย ${currentExamData.q1.unit})`;
+        document.getElementById('exam-q2-text').innerText = currentExamData.q2.questionText;
+        renderSingleMeasurementFigure(currentExamData.q1, 'exam-q1-figure');
+        restoreExamAnswers(parsed.answers);
+        showSection('exam-live');
+
+        const remaining = getCurrentExamRemainingSeconds();
+        examTimeRemaining = remaining;
+        document.getElementById('exam-timer-display').innerText = formatExamTime(remaining);
+        document.getElementById('exam-timer-display').classList.toggle('text-rose-500', remaining < 60);
+
+        startExamExitGuard();
+
+        if (remaining <= 0) {
+          submitExam(true);
+        } else {
+          startExamTimer();
+        }
+
+        return true;
+      } catch (error) {
+        console.error('Failed to restore exam session:', error);
+        clearExamSession();
+        return false;
+      }
+    }
+
+    function endExamSession() {
+      examIsActive = false;
+      examSubmissionInProgress = false;
+      examStartTimestamp = null;
+      examDeadlineTimestamp = null;
+      clearInterval(examTimerInterval);
+      stopExamExitGuard();
+      clearExamSession();
+    }
+
+    // Helper: Render LaTeX math equations using MathJax
+    function renderMath() {
+      if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+        MathJax.typesetPromise().catch(function (err) {
+          console.error("MathJax rendering error: ", err);
+        });
+      } else if (typeof MathJax !== 'undefined' && MathJax.typeset) {
+        MathJax.typeset();
+      }
+    }
+
+    // Run on startup
+    window.onload = function() {
+      // 1. Setup local storage display on Home Page
+      updateLatestScoreOnHome();
+      
+      // 2. Initialize interactive Ruler Simulator in Review
+      initRulerSimulator();
+
+      // 3. Render Math equations
+      renderMath();
+
+      // 4. Restore an in-progress exam if the page was refreshed
+      restoreActiveExamSession();
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMeasurementZoom();
+      }
+    });
+
+    document.addEventListener('input', function(event) {
+      if (!examIsActive || !event.target || !event.target.id) return;
+
+      const examAnswerInputIds = ['exam-q1-mean', 'exam-q1-unc', 'exam-q2-mean', 'exam-q2-unc'];
+      if (examAnswerInputIds.includes(event.target.id)) {
+        persistExamSession();
+      }
+    });
+
+    // Helper: Navigation Router
+    function showSection(sectionId) {
+      let normalizedSectionId = sectionId.startsWith('sec-') ? sectionId.slice(4) : sectionId;
+
+      if (examIsActive && normalizedSectionId !== 'exam-live' && normalizedSectionId !== 'exam-result') {
+        triggerAlert("กำลังสอบอยู่", "ระหว่างสอบระบบจะล็อกไม่ให้ย้อนกลับหรือออกจากหน้า เพื่อให้เวลาทำข้อสอบเดินต่อเนื่อง", "fa-lock", "bg-amber-100 text-amber-600");
+        normalizedSectionId = 'exam-live';
+      }
+
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+
+      // Hide all main section containers
+      document.getElementById('sec-home').classList.add('hidden');
+      document.getElementById('sec-review').classList.add('hidden');
+      document.getElementById('sec-practice').classList.add('hidden');
+      document.getElementById('sec-exam-start').classList.add('hidden');
+      document.getElementById('sec-exam-live').classList.add('hidden');
+      document.getElementById('sec-exam-result').classList.add('hidden');
+
+      // Clear intervals if navigating away from exam
+      if (normalizedSectionId !== 'exam-live' && !examIsActive) {
+        clearInterval(examTimerInterval);
+      }
+
+      // Show requested section
+      const activeSec = document.getElementById('sec-' + normalizedSectionId);
+      if (activeSec) {
+        activeSec.classList.remove('hidden');
+        currentSection = normalizedSectionId;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Process Mathjax rendering on dynamic updates
+      renderMath();
+    }
+
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) {
+        mobileMenu.classList.toggle('hidden');
+      }
+    }
+
+    // Custom non-blocking modal alert to obey RULE
+    function triggerAlert(title, message, iconClass = 'fa-circle-exclamation', iconColorClass = 'bg-rose-100 text-rose-600') {
+      const modal = document.getElementById('modal-alert');
+      const card = document.getElementById('modal-alert-card');
+      const icon = document.getElementById('modal-alert-icon');
+      
+      document.getElementById('modal-alert-title').innerText = title;
+      document.getElementById('modal-alert-msg').innerText = message;
+      
+      // Setup icon styling
+      icon.className = `w-14 h-14 rounded-full mx-auto flex items-center justify-center text-2xl ${iconColorClass}`;
+      icon.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        card.classList.remove('scale-95', 'opacity-0');
+        card.classList.add('scale-100', 'opacity-100');
+      }, 50);
+    }
+
+    function closeAlertModal() {
+      const modal = document.getElementById('modal-alert');
+      const card = document.getElementById('modal-alert-card');
+      card.classList.remove('scale-100', 'opacity-100');
+      card.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    // Local Storage Management
+    function updateLatestScoreOnHome() {
+      const saved = localStorage.getItem('last_exam_results');
+      const badge = document.getElementById('latest-score-badge');
+      if (saved) {
+        const info = JSON.parse(saved);
+        const finishedLabel = info.finishedAtDisplay || info.date || 'ไม่พบเวลาส่ง';
+        document.getElementById('lbl-last-score').innerText = `${info.score} / 5 คะแนน (${info.studentInfo?.name || info.name || '-'}) • ${finishedLabel}`;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function showLatestResultModal() {
+      const saved = localStorage.getItem('last_exam_results');
+      if (saved) {
+        const info = JSON.parse(saved);
+        // Load the stored exam solutions and details into the result section
+        currentExamData = info.examData;
+        showSection('exam-result');
+        displayExamResults(info.score, info.q1Correct, info.q2Correct, info.timeTaken, info.studentInfo, info.finishedAtDisplay || info.date || '-');
+      }
+    }
+
+    // ----------------------------------------------------
+    // TAB REVIEW CONTROL
+    // ----------------------------------------------------
+    function switchReviewTab(tabName) {
+      const btnSingle = document.getElementById('btn-tab-single');
+      const btnRepeated = document.getElementById('btn-tab-repeated');
+      const tabSingle = document.getElementById('review-tab-single');
+      const tabRepeated = document.getElementById('review-tab-repeated');
+
+      if (tabName === 'single') {
+        btnSingle.className = "flex-1 text-center py-2 text-sm font-bold rounded-lg transition-all duration-200 bg-white text-blue-900 shadow-sm";
+        btnRepeated.className = "flex-1 text-center py-2 text-sm font-bold rounded-lg transition-all duration-200 text-slate-600 hover:text-slate-900";
+        tabSingle.classList.remove('hidden');
+        tabRepeated.classList.add('hidden');
+      } else {
+        btnRepeated.className = "flex-1 text-center py-2 text-sm font-bold rounded-lg transition-all duration-200 bg-white text-blue-900 shadow-sm";
+        btnSingle.className = "flex-1 text-center py-2 text-sm font-bold rounded-lg transition-all duration-200 text-slate-600 hover:text-slate-900";
+        tabRepeated.classList.remove('hidden');
+        tabSingle.classList.add('hidden');
+      }
+      renderMath();
+    }
+
+    // Interactive Ruler simulation implementation
+    function initRulerSimulator() {
+      const slider = document.getElementById('pencil-slider');
+      const rulerScale = document.getElementById('ruler-scale');
+
+      // Populate ruler ticks (0 to 5 cm)
+      rulerScale.innerHTML = '';
+      for (let i = 0; i <= 50; i++) {
+        const isMajor = i % 10 === 0;
+        const isMedium = i % 5 === 0 && !isMajor;
+        const tick = document.createElement('div');
+        tick.className = `absolute bottom-0 bg-slate-800 transition-all duration-75`;
+        
+        // Positioning
+        tick.style.left = `${(i / 50) * 100}%`;
+        
+        // Height and width based on tick value
+        if (isMajor) {
+          tick.style.height = '14px';
+          tick.style.width = '2px';
+          // Label
+          const lbl = document.createElement('span');
+          lbl.className = 'absolute -top-5 left-1/2 transform -translate-x-1/2 text-[9px] font-bold text-slate-700';
+          lbl.innerText = `${i / 10}`;
+          tick.appendChild(lbl);
+        } else if (isMedium) {
+          tick.style.height = '10px';
+          tick.style.width = '1.5px';
+        } else {
+          tick.style.height = '6px';
+          tick.style.width = '1px';
+        }
+        rulerScale.appendChild(tick);
+      }
+
+      // Slider event listener
+      slider.addEventListener('input', function() {
+        const val = parseFloat(this.value);
+        updateRulerDisplay(val);
+      });
+
+      // Init on startup
+      updateRulerDisplay(parseFloat(slider.value));
+    }
+
+    function updateRulerDisplay(val) {
+      // Update simulated flat block visual width (starts perfectly from left 0)
+      const maxRange = 5.0; // Ruler displays 0 to 5
+      const percent = (val / maxRange) * 100;
+      document.getElementById('sim-object').style.width = `${percent}%`;
+
+      // Update Labels
+      document.getElementById('lbl-pencil-val').innerText = `${formatHalfEven(val, 2)} cm`;
+      
+      const clearVal = roundHalfEven(Math.floor((val / 0.1) + 1e-9) * 0.1, 6);
+      const upperVal = roundHalfEven(clearVal + 0.1, 6);
+      document.getElementById('lbl-clear-val').innerText = `${formatHalfEven(clearVal, 2)} cm`;
+      
+      const estVal = val - clearVal;
+      document.getElementById('lbl-est-val').innerText = `${formatHalfEven(estVal, 2)} cm`;
+      document.getElementById('lbl-bracket-ticks').innerText = `${formatHalfEven(clearVal, 2)} cm และ ${formatHalfEven(upperVal, 2)} cm`;
+      document.getElementById('lbl-delta-val').innerText = `$0.05 \\text{ cm}$`;
+
+      // Update Zoom View content
+      const zoomTicks = document.getElementById('sim-zoom-ticks');
+      const zoomTip = document.getElementById('sim-zoom-tip');
+      zoomTicks.innerHTML = '';
+
+      // We want to show a magnified view around the current measurement tip.
+      // We will place tick marks for 4 nearby minor subdivisions
+      const targetInt = Math.floor((val / 0.1) + 1e-9); // e.g. 34 for 3.45 cm
+      const baseTickVal = (targetInt - 2) / 10; // start 2 ticks back
+
+      for (let i = 0; i <= 4; i++) {
+        const tickVal = baseTickVal + (i * 0.1);
+        const tickPercent = ((tickVal - baseTickVal) / 0.4) * 100;
+        
+        const tick = document.createElement('div');
+        tick.className = 'absolute bottom-0 h-10 w-0.5 bg-slate-700 flex flex-col justify-between items-center';
+        tick.style.left = `${tickPercent}%`;
+        
+        const lbl = document.createElement('span');
+        lbl.className = 'text-[9px] text-slate-500 font-bold -mt-4';
+        lbl.innerText = `${formatHalfEven(tickVal, 1)}`;
+        tick.appendChild(lbl);
+
+        zoomTicks.appendChild(tick);
+      }
+
+      // Calculate where the block tip aligns inside this zoom view relative to the baseTickVal
+      const tipPercent = ((val - baseTickVal) / 0.4) * 100;
+      zoomTip.style.width = `${tipPercent}%`;
+
+      // Update Mathjax Live Preview
+      const liveBox = document.getElementById('sim-live-latex');
+      liveBox.innerText = `\\[ ${formatHalfEven(val, 2)} \\pm 0.05 \\text{ cm} \\]`;
+
+      renderMath();
+    }
+
+
+    // ----------------------------------------------------
+    // CORE MATH ALGORITHMS (CRITICAL - GUILDLINES BASED)
+    // ----------------------------------------------------
+    
+    // 1. Single Measurement Solver & Generator
+    function generateSingleMeasurementQuestion() {
+      const materials = ["บล็อกเหล็กทรงสี่เหลี่ยม", "แผ่นไม้แกะสลัก", "แท่งแก้วทดลอง", "ก้อนอะลูมิเนียมขัดทราย", "แท่งคาร์บอน"];
+      const units = ["cm", "mm"];
+      const resolutions = [0.1, 0.2, 0.5, 1.0]; // cm or mm based on index
+      
+      const material = materials[Math.floor(Math.random() * materials.length)];
+      const unit = units[Math.floor(Math.random() * units.length)];
+      const resolution = resolutions[Math.floor(Math.random() * resolutions.length)];
+      
+      // Calculate delta via the custom bounding-tick difference method
+      const deltaXRaw = resolution / 2;
+      const deltaX = roundTo1SigFig(deltaXRaw);
+      
+      // Keep the object tip between two ticks so students really estimate from the scale.
+      const dp = getDecimalPlaces(deltaX);
+      const baseTick = roundHalfEven(Math.floor((2.0 + Math.random() * 6.0) / resolution) * resolution, 6);
+      const rawMeasuredValue = roundHalfEven(baseTick + ((0.2 + Math.random() * 0.6) * resolution), 6);
+      const measuredValue = roundHalfEven(rawMeasuredValue, dp);
+
+      return {
+        type: 'single',
+        material: material,
+        unit: unit,
+        resolution: resolution,
+        rawMeasuredValue: rawMeasuredValue,
+        measuredValue: measuredValue,
+        deltaX: deltaX,
+        questionText: `นักเรียนใช้เครื่องมือวัดซึ่งสเกลมีขีดข้างเคียงคร่อมล้อมรอบห่างกันช่วงละ ${resolution} ${unit} เพื่อวัดความยาวของ ${material} โดยเริ่มต้นวางที่ขีดศูนย์พอดีและปลายสิ้นสุดอ่านค่าร่วมกับค่ากะประมาณได้เป็น ${measuredValue} ${unit} จงรายงานผลการบันทึกข้อมูลการวัดให้ถูกต้องตามมาตรฐานหลักการฟิสิกส์`
+      };
+    }
+
+    // 2. Repeated Measurement Generator
+    function generateRepeatedMeasurementQuestion() {
+      const units = ["วินาที", "เซนติเมตร", "กรัม", "องศาเซลเซียส"];
+      const tasks = [
+        "ปล่อยวัตถุตกแบบเสรีและบันทึกเวลาการเคลื่อนที่",
+        "วัดเส้นผ่านศูนย์กลางภายในท่อน้ำเหล็ก",
+        "ชั่งมวลของเม็ดสารเคมีสกัดแห้ง",
+        "บันทึกการเพิ่มขึ้นของอุณหภูมิห้องแล็บ"
+      ];
+      
+      const idx = Math.floor(Math.random() * tasks.length);
+      const task = tasks[idx];
+      const unit = units[idx];
+      
+      const baseVal = 5.0 + Math.random() * 12.0; // 5.0 to 17.0
+      const n = 4 + Math.floor(Math.random() * 3); // 4 to 6 times
+      
+      let dataset = [];
+      let spreadAttempts = 0;
+      do {
+        dataset = [];
+        for (let i = 0; i < n; i++) {
+          // Generates small spread (baseVal +/- 0.15)
+          const offset = -0.15 + Math.random() * 0.30;
+          dataset.push(roundHalfEven(baseVal + offset, 2));
+        }
+        spreadAttempts++;
+      } while (new Set(dataset).size < 2 && spreadAttempts < 20);
+
+      // 35% chance to inject a distinct outlier
+      let outlierInjected = false;
+      let rawFullDataset = [...dataset];
+      if (Math.random() < 0.35) {
+        // High outlier
+        const outlier = roundHalfEven(baseVal + 4.5 + Math.random() * 2, 2);
+        rawFullDataset.push(outlier);
+        outlierInjected = true;
+      }
+
+      // Solve internally using our defined mathematical functions
+      const solution = solveRepeatedMeasurementQuestion(rawFullDataset);
+
+      let dataStringList = rawFullDataset.join(", ");
+
+      return {
+        type: 'repeated',
+        task: task,
+        unit: unit,
+        dataset: rawFullDataset,
+        outlierInjected: outlierInjected,
+        solution: solution,
+        questionText: `ในการทดลองเรื่อง "${task}" นักเรียนทำการวัดซ้ำเพื่อตรวจสอบความเที่ยงตรงได้ผลเป็น ${dataStringList} ${unit} จงรายงานค่าเฉลี่ยและค่าความคลาดเคลื่อนของค่าเฉลี่ยให้ถูกต้องสอดคล้องตามหลักเลขนัยสำคัญ`
+      };
+    }
+
+    // Outlier Detection (Rule 2 Compound Query forbidden, client side filtering)
+    function detectOutliers(data) {
+      const sorted = [...data].sort((a, b) => a - b);
+      const middle = Math.floor(sorted.length / 2);
+      const median = sorted.length % 2 === 0
+        ? (sorted[middle - 1] + sorted[middle]) / 2
+        : sorted[middle];
+      
+      const outliers = [];
+      const valid = [];
+      
+      data.forEach(x => {
+        if (Math.abs(x - median) > 1.5) {
+          outliers.push(x);
+        } else {
+          valid.push(x);
+        }
+      });
+      
+      return { valid, outliers };
+    }
+
+    // Solver logic matching teaching sheets
+    function solveRepeatedMeasurementQuestion(data) {
+      // 1. Gaining valid subset
+      const { valid, outliers } = detectOutliers(data);
+      
+      // 2. Compute Mean
+      const sum = valid.reduce((acc, curr) => acc + curr, 0);
+      const meanRaw = sum / valid.length;
+      
+      // 3. Compute Delta Mean (Range / 2)
+      const maxVal = Math.max(...valid);
+      const minVal = Math.min(...valid);
+      const deltaRaw = (maxVal - minVal) / 2;
+
+      // 4. Round uncertainty to exactly 1 significant figure
+      const deltaFinal = roundTo1SigFig(deltaRaw);
+      
+      // 5. Match decimal places of mean with delta
+      const dp = getDecimalPlaces(deltaFinal);
+      const meanFinal = roundHalfEven(meanRaw, dp);
+
+      return {
+        originalData: data,
+        validData: valid,
+        outliers: outliers,
+        meanRaw: meanRaw,
+        deltaRaw: deltaRaw,
+        meanFinal: meanFinal,
+        deltaFinal: deltaFinal,
+        decimalPlaces: dp
+      };
+    }
+
+    // Helper: Round to a fixed number of decimal places using "round half to even"
+    // Examples: 2.25 -> 2.2, 2.15 -> 2.2 when rounded to 1 decimal place.
+    function roundHalfEven(num, decimalPlaces = 0) {
+      if (!Number.isFinite(num)) return num;
+
+      const factor = Math.pow(10, decimalPlaces);
+      const sign = Math.sign(num) || 1;
+      const scaled = Math.abs(num) * factor;
+      const floor = Math.floor(scaled);
+      const fraction = scaled - floor;
+      const epsilon = 1e-10;
+
+      let roundedInteger;
+      if (fraction > 0.5 + epsilon) {
+        roundedInteger = floor + 1;
+      } else if (fraction < 0.5 - epsilon) {
+        roundedInteger = floor;
+      } else {
+        roundedInteger = floor % 2 === 0 ? floor : floor + 1;
+      }
+
+      const rounded = sign * roundedInteger / factor;
+      return decimalPlaces > 0 ? Number(rounded.toFixed(decimalPlaces)) : rounded;
+    }
+
+    function formatHalfEven(num, decimalPlaces = 0) {
+      const rounded = roundHalfEven(num, decimalPlaces);
+      return decimalPlaces > 0 ? rounded.toFixed(decimalPlaces) : rounded.toString();
+    }
+
+    // Helper: Round to exactly 1 Significant Figure using "round half to even"
+    function roundTo1SigFig(num) {
+      if (num === 0) return 0;
+      const d = Math.ceil(Math.log10(num < 0 ? -num : num));
+      const power = 1 - d;
+      return roundHalfEven(num, power);
+    }
+
+    // Helper: Find decimal places
+    function getDecimalPlaces(num) {
+      const str = num.toString();
+      if (str.indexOf('.') === -1) return 0;
+      return str.split('.')[1].length;
+    }
+
+    function getTypedDecimalPlaces(valueString) {
+      const normalized = valueString.trim();
+      const match = normalized.match(/^[+-]?(?:\d+|\d*\.\d+)$/);
+      if (!match) return null;
+
+      const decimalIndex = normalized.indexOf('.');
+      return decimalIndex === -1 ? 0 : normalized.length - decimalIndex - 1;
+    }
+
+    function isNumericAnswerWithExactDecimals(valueString, targetValue, requiredDecimalPlaces) {
+      const typedDecimalPlaces = getTypedDecimalPlaces(valueString);
+      if (typedDecimalPlaces !== requiredDecimalPlaces) return false;
+
+      const numericValue = Number(valueString);
+      return Number.isFinite(numericValue) && Math.abs(numericValue - targetValue) < 1e-9;
+    }
+
+    function isSingleMeanAnswerCorrect(valueString, data) {
+      const typedDecimalPlaces = getTypedDecimalPlaces(valueString);
+      const requiredDecimalPlaces = getDecimalPlaces(data.deltaX);
+      if (typedDecimalPlaces !== requiredDecimalPlaces) return false;
+
+      const numericValue = Number(valueString);
+      return Number.isFinite(numericValue) && isSingleMeanAcceptable(numericValue, data);
+    }
+
+    function getSingleMeasurementReferenceValue(data) {
+      return Number.isFinite(data.rawMeasuredValue) ? data.rawMeasuredValue : data.measuredValue;
+    }
+
+    function getSingleMeasurementBounds(data) {
+      const referenceValue = getSingleMeasurementReferenceValue(data);
+      const quotient = referenceValue / data.resolution;
+      const lowerTickIndex = Math.floor(quotient + 1e-9);
+      const lower = lowerTickIndex * data.resolution;
+      return {
+        lower: roundHalfEven(lower, 6),
+        upper: roundHalfEven(lower + data.resolution, 6)
+      };
+    }
+
+    function getSingleMeanTolerance(data) {
+      return data.resolution * 0.15;
+    }
+
+    function isSingleMeanAcceptable(inputMean, data) {
+      return Math.abs(inputMean - data.measuredValue) <= getSingleMeanTolerance(data);
+    }
+
+    function getRoundingExplanation(rawValue, roundedValue, label, unit = '') {
+      const direction = roundedValue > rawValue ? 'ปัดขึ้น' : roundedValue < rawValue ? 'ปัดลง' : 'ไม่ต้องปัด';
+      const reason = Math.abs(roundedValue - rawValue) < 1e-12
+        ? 'เพราะค่าดิบอยู่ในรูปที่ต้องรายงานพอดีแล้ว'
+        : direction === 'ปัดขึ้น'
+          ? 'ตามหลักปัดครึ่งให้เป็นเลขคู่ หรือกรณีมากกว่าครึ่ง'
+          : 'ตามหลักปัดครึ่งให้เป็นเลขคู่ หรือกรณีน้อยกว่าครึ่ง';
+      return `${label}: ${formatHalfEven(rawValue, 4)} ${unit} → ${roundedValue} ${unit} (${direction} ${reason})`;
+    }
+
+    function renderSingleMeasurementFigure(data, targetElementId, enableZoom = true) {
+      const root = document.getElementById(targetElementId);
+      if (!root || !data) return;
+
+      const dp = getDecimalPlaces(data.deltaX);
+      const resolution = data.resolution;
+      const measured = getSingleMeasurementReferenceValue(data);
+      const { lower, upper } = getSingleMeasurementBounds(data);
+
+      let minTick = lower - (2 * resolution);
+      let maxTick = upper + (2 * resolution);
+      if (minTick < 0) {
+        maxTick += Math.abs(minTick);
+        minTick = 0;
+      }
+
+      const totalSteps = Math.round((maxTick - minTick) / resolution);
+      const width = 920;
+      const padX = 56;
+      const scaleWidth = width - (padX * 2);
+      const toX = (v) => padX + ((v - minTick) / (maxTick - minTick)) * scaleWidth;
+      const xMeasured = toX(measured);
+
+      let tickLines = '';
+      let tickLabels = '';
+      for (let i = 0; i <= totalSteps; i++) {
+        const val = minTick + (i * resolution);
+        const x = toX(val);
+        const isBracket = Math.abs(val - lower) < 1e-12 || Math.abs(val - upper) < 1e-12;
+        const h = isBracket ? 52 : 36;
+        const color = isBracket ? '#1d4ed8' : '#334155';
+        tickLines += `<line x1="${x}" y1="118" x2="${x}" y2="${118 - h}" stroke="${color}" stroke-width="${isBracket ? 3 : 2}" vector-effect="non-scaling-stroke"/>`;
+        tickLabels += `<text x="${x}" y="140" text-anchor="middle" font-size="16" fill="#0f172a" font-weight="${isBracket ? 700 : 500}">${formatHalfEven(val, dp)}</text>`;
+      }
+
+      const estDp = Math.max(dp, 2);
+      const estPart = measured - lower;
+      const objectStart = toX(minTick);
+
+      root.innerHTML = `
+      <svg viewBox="0 0 920 210" class="w-full h-auto" role="img" aria-label="ภาพปลายวัตถุวางบนสเกล">
+        <rect x="0" y="0" width="920" height="210" rx="10" fill="#f8fafc"/>
+        <text x="24" y="30" font-size="18" fill="#0f172a" font-weight="700">อ่านปลายวัตถุบนสเกล (${data.unit})</text>
+        <text x="24" y="54" font-size="13" fill="#475569">สเกลห่างกันขีดละ ${resolution} ${data.unit}</text>
+
+        <rect x="${padX}" y="82" width="${scaleWidth}" height="48" rx="6" fill="#fef3c7" stroke="#d97706"/>
+        <rect x="${objectStart}" y="65" width="${xMeasured - objectStart}" height="30" rx="4" fill="#60a5fa" stroke="#2563eb"/>
+        <line x1="${xMeasured}" y1="58" x2="${xMeasured}" y2="130" stroke="#dc2626" stroke-width="3" vector-effect="non-scaling-stroke"/>
+        <path d="M ${xMeasured - 8} 58 L ${xMeasured} 48 L ${xMeasured + 8} 58 Z" fill="#dc2626"/>
+        <text x="${Math.min(xMeasured + 12, 760)}" y="62" font-size="14" fill="#b91c1c" font-weight="700">ปลายวัตถุ</text>
+        ${tickLines}
+        ${tickLabels}
+
+        <rect x="24" y="165" width="872" height="28" rx="6" fill="#e0f2fe" stroke="#bae6fd"/>
+        <text x="44" y="184" font-size="14" fill="#0f172a">ปลายวัตถุอยู่ระหว่าง ${formatHalfEven(lower, dp)} และ ${formatHalfEven(upper, dp)} ${data.unit}; ส่วนที่ต้องกะประมาณประมาณ ${formatHalfEven(estPart, estDp)} ${data.unit}</text>
+      </svg>`;
+
+      if (enableZoom) {
+        root.classList.add('measurement-figure');
+        root.setAttribute('role', 'button');
+        root.setAttribute('tabindex', '0');
+        root.setAttribute('aria-label', 'เปิดภาพสเกลแบบขยาย');
+        root.onclick = () => openMeasurementZoom(data);
+        root.onkeydown = (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openMeasurementZoom(data);
+          }
+        };
+      } else {
+        root.classList.remove('measurement-figure');
+        root.removeAttribute('role');
+        root.removeAttribute('tabindex');
+        root.removeAttribute('aria-label');
+        root.onclick = null;
+        root.onkeydown = null;
+      }
+    }
+
+    function openMeasurementZoom(data) {
+      const modal = document.getElementById('measurement-zoom-modal');
+      const stage = document.getElementById('measurement-zoom-stage');
+      if (!modal || !stage) return;
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      renderSingleMeasurementFigure(data, 'measurement-zoom-stage', false);
+      stage.scrollLeft = Math.max(0, (stage.scrollWidth - stage.clientWidth) / 2);
+    }
+
+    function closeMeasurementZoom() {
+      const modal = document.getElementById('measurement-zoom-modal');
+      const stage = document.getElementById('measurement-zoom-stage');
+      if (modal) modal.classList.add('hidden');
+      if (stage) stage.innerHTML = '';
+      document.body.classList.remove('overflow-hidden');
+    }
+
+
+    // ----------------------------------------------------
+    // PRACTICE ACTIONS ENGINE
+    // ----------------------------------------------------
+    function startPracticeMode(mode) {
+      currentPracticeMode = mode;
+      document.getElementById('practice-arena').classList.remove('hidden');
+      
+      // Update UI selection color badges
+      const btnSingle = document.getElementById('btn-prac-single');
+      const btnRepeated = document.getElementById('btn-prac-repeated');
+
+      if (mode === 'single') {
+        btnSingle.className = "p-4 bg-blue-50 hover:bg-blue-100 text-slate-800 rounded-xl border-2 border-blue-500 flex items-center gap-4 transition text-left";
+        btnRepeated.className = "p-4 bg-white hover:bg-indigo-50 text-slate-800 rounded-xl border border-slate-200 flex items-center gap-4 transition text-left";
+      } else {
+        btnRepeated.className = "p-4 bg-indigo-50 hover:bg-indigo-100 text-slate-800 rounded-xl border-2 border-indigo-500 flex items-center gap-4 transition text-left";
+        btnSingle.className = "p-4 bg-white hover:bg-blue-50 text-slate-800 rounded-xl border border-slate-200 flex items-center gap-4 transition text-left";
+      }
+
+      regeneratePractice();
+    }
+
+    function regeneratePractice() {
+      // Clear answers & hidden blocks
+      document.getElementById('prac-input-mean').value = '';
+      document.getElementById('prac-input-unc').value = '';
+      document.getElementById('prac-feedback').className = "hidden p-5 rounded-2xl border transition-all duration-300";
+      document.getElementById('prac-explanation-box').classList.add('hidden');
+
+      if (currentPracticeMode === 'single') {
+        document.getElementById('prac-badge-mode').className = "bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold";
+        document.getElementById('prac-badge-mode').innerText = "โหมด: การวัดครั้งเดียว";
+        currentPracticeData = generateSingleMeasurementQuestion();
+        document.getElementById('prac-question-text').innerText = `ดูภาพสเกลด้านล่างเพื่ออ่านค่าการวัด ${currentPracticeData.material} แล้วรายงานผลในรูป x ± Δx หน่วย ${currentPracticeData.unit}`;
+        document.getElementById('prac-single-figure').classList.remove('hidden');
+        renderSingleMeasurementFigure(currentPracticeData, 'prac-single-figure');
+      } else {
+        document.getElementById('prac-badge-mode').className = "bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-bold";
+        document.getElementById('prac-badge-mode').innerText = "โหมด: การวัดหลายครั้ง";
+        currentPracticeData = generateRepeatedMeasurementQuestion();
+        document.getElementById('prac-question-text').innerText = currentPracticeData.questionText;
+        document.getElementById('prac-single-figure').classList.add('hidden');
+        document.getElementById('prac-single-figure').innerHTML = '';
+      }
+      
+      // Trigger rendering of math
+      renderMath();
+    }
+
+    function checkPracticeAnswer() {
+      const inputMeanStr = document.getElementById('prac-input-mean').value.trim();
+      const inputUncStr = document.getElementById('prac-input-unc').value.trim();
+
+      if (!inputMeanStr || !inputUncStr) {
+        triggerAlert("ช่องว่าง!", "โปรดกรอกข้อมูลให้ครบถ้วนทั้งช่องค่ากลางและช่องค่าคลาดเคลื่อนครับ", "fa-circle-question", "bg-amber-100 text-amber-600");
+        return;
+      }
+
+      const inputMean = Number(inputMeanStr);
+      const inputUnc = Number(inputUncStr);
+
+      const feedback = document.getElementById('prac-feedback');
+      let isCorrect = false;
+      let detailedExplain = "";
+
+      if (currentPracticeMode === 'single') {
+        // Target values
+        const targetMean = currentPracticeData.measuredValue;
+        const targetUnc = currentPracticeData.deltaX;
+        const resolution = currentPracticeData.resolution;
+        const dp = getDecimalPlaces(targetUnc);
+
+        // Compute surrounding scale marks to fit the requested physics theory
+        const { lower: lowerBound, upper: upperBound } = getSingleMeasurementBounds(currentPracticeData);
+        const tolerance = getSingleMeanTolerance(currentPracticeData);
+        const minAccepted = targetMean - tolerance;
+        const maxAccepted = targetMean + tolerance;
+
+        // Check closeness
+        const meanClose = isSingleMeanAnswerCorrect(inputMeanStr, currentPracticeData);
+        const uncClose = isNumericAnswerWithExactDecimals(inputUncStr, targetUnc, dp);
+
+        isCorrect = meanClose && uncClose;
+        const deltaRounding = getRoundingExplanation(resolution / 2, targetUnc, 'การปัดค่าความคลาดเคลื่อน', currentPracticeData.unit);
+        const meanRounding = getRoundingExplanation(currentPracticeData.rawMeasuredValue || targetMean, roundHalfEven(targetMean, dp), 'การปัดค่าที่อ่านได้', currentPracticeData.unit);
+        const targetMeanText = formatHalfEven(targetMean, dp);
+        const targetUncText = formatHalfEven(targetUnc, dp);
+        const lowerBoundText = formatHalfEven(lowerBound, dp);
+        const upperBoundText = formatHalfEven(upperBound, dp);
+        const minAcceptedText = formatHalfEven(minAccepted, dp);
+        const maxAcceptedText = formatHalfEven(maxAccepted, dp);
+        const measuredRawText = formatHalfEven(getSingleMeasurementReferenceValue(currentPracticeData), Math.max(dp, 2));
+
+        detailedExplain = `
+          <p><strong>ขั้นตอนที่ 1: อ่านค่ากลาง ($x$)</strong><br>ปลายวัตถุอยู่ระหว่าง $${lowerBoundText}$ และ $${upperBoundText} \\text{ ${currentPracticeData.unit}}$ โดยตำแหน่งจริงบนภาพอยู่ประมาณ $${measuredRawText} \\text{ ${currentPracticeData.unit}}$ เมื่อนำไปรายงานตามตำแหน่งทศนิยมที่สอดคล้องกัน จะได้ $x = ${targetMeanText} \\text{ ${currentPracticeData.unit}}$<br>
+          ระบบยอมรับค่ากะประมาณที่สมเหตุสมผลในช่วง ${minAcceptedText} ถึง ${maxAcceptedText} ${currentPracticeData.unit} เพราะจุดนี้เป็นค่าที่ต้องเดาด้วยสายตา แต่ต้องไม่หลุดจากตำแหน่งปลายวัตถุในภาพ</p>
+          <p><strong>ขั้นตอนที่ 2: หาความคลาดเคลื่อน ($\\Delta x$) จากขีดสเกลคร่อมล้อมรอบค่าจริง</strong><br>
+          ขีดสเกลที่ล้อมรอบปลายวัตถุจริง $${measuredRawText}$ บนเครื่องมือนี้ คือขีดสเกลล่าง $x_{\\text{ขีดล่าง}} = ${lowerBoundText} \\text{ ${currentPracticeData.unit}}$ และขีดสเกลบน $x_{\\text{ขีดบน}} = ${upperBoundText} \\text{ ${currentPracticeData.unit}}$<br>
+          คำนวณหาความคลาดเคลื่อนด้วยวิธีหาผลต่างสมบูรณ์ของสองสเกลล้อมรอบแล้วหารสอง:<br>
+          $$\\Delta x = \\frac{|x_{\\text{ขีดบน}} - x_{\\text{ขีดล่าง}}|}{2} = \\frac{|${upperBoundText} - ${lowerBoundText}|}{2} = \\frac{${resolution}}{2} = ${targetUncText} \\text{ ${currentPracticeData.unit}}$$<br>
+          <em>วิธีนี้ป้องกันการจำสับสนในกรณีเครื่องมือสเกลพิเศษได้ดีที่สุด</em></p>
+          <p><strong>ขั้นตอนที่ 3: ปัดเลขและจัดตำแหน่งทศนิยม</strong><br>
+          ${deltaRounding}<br>
+          ${meanRounding}<br>
+          เนื่องจากความคลาดเคลื่อน $\\Delta x = ${targetUncText}$ มีตำแหน่งทศนิยม ${dp} ตำแหน่ง ค่ากลาง $x$ จึงต้องรายงานทศนิยมสอดคล้องกันที่ ${dp} ตำแหน่งด้วย นั่นคือ $${targetMeanText}$</p>
+          <p class="font-bold text-slate-800 mt-2">รายงานคำตอบสุดท้ายสากลคือ: $${targetMeanText} \\pm ${targetUncText} \\text{ ${currentPracticeData.unit}}$</p>
+        `;
+      } else {
+        // Repeated measurement checking
+        const sol = currentPracticeData.solution;
+        
+        const meanClose = isNumericAnswerWithExactDecimals(inputMeanStr, sol.meanFinal, sol.decimalPlaces);
+        const uncClose = isNumericAnswerWithExactDecimals(inputUncStr, sol.deltaFinal, sol.decimalPlaces);
+
+        isCorrect = meanClose && uncClose;
+
+        let outlierText = "";
+        if (sol.outliers.length > 0) {
+          outlierText = `มีค่าที่ผิดปกติโดดหลุดกลุ่มคือ <strong>${sol.outliers.join(', ')} ${currentPracticeData.unit}</strong> ซึ่งต้องทำการตัดทิ้งและนำส่วนที่เหลือมาคำนวณ`;
+        } else {
+          outlierText = `ไม่มีค่าที่หลุดกลุ่มผิดปกติ จึงสามารถใช้ข้อมูลได้หมดทั้ง ${sol.validData.length} ค่า`;
+        }
+        const deltaRounding = getRoundingExplanation(sol.deltaRaw, sol.deltaFinal, 'การปัดค่าความคลาดเคลื่อน', currentPracticeData.unit);
+        const meanRounding = getRoundingExplanation(sol.meanRaw, sol.meanFinal, 'การปัดค่าเฉลี่ย', currentPracticeData.unit);
+        const meanRawText = formatHalfEven(sol.meanRaw, 4);
+        const deltaRawText = formatHalfEven(sol.deltaRaw, 4);
+        const meanFinalText = formatHalfEven(sol.meanFinal, sol.decimalPlaces);
+        const deltaFinalText = formatHalfEven(sol.deltaFinal, sol.decimalPlaces);
+
+        detailedExplain = `
+          <p><strong>1. คัดแยกข้อมูลที่ผิดปกติ (Outlier):</strong><br>${outlierText}</p>
+          <p><strong>2. หาค่าเฉลี่ยกลาง ($\\bar{x}$):</strong><br>
+          $$\\bar{x} = \\frac{${sol.validData.join(' + ')}}{${sol.validData.length}} = ${meanRawText}$$</p>
+          <p><strong>3. หาความคลาดเคลื่อนดิบ ($\\Delta \\bar{x}$):</strong><br>
+          $$\\Delta \\bar{x}_{\\text{ดิบ}} = \\frac{${Math.max(...sol.validData)} (x_{\\max}) - ${Math.min(...sol.validData)} (x_{\\min})}{2} = ${deltaRawText}$$</p>
+          <p><strong>4. ปรับเลขนัยสำคัญ 1 ตัวที่ความคลาดเคลื่อน:</strong><br>
+          ${deltaRounding}<br>
+          ดังนั้นค่าคลาดเคลื่อนสุดท้ายคือ <strong>$${deltaFinalText}$</strong> (ทศนิยม ${sol.decimalPlaces} ตำแหน่ง)</p>
+          <p><strong>5. ปรับตำแหน่งทศนิยมของค่าเฉลี่ยกลางให้เท่ากัน:</strong><br>
+          ${meanRounding}<br>
+          ปัดค่าเฉลี่ยให้มีทศนิยม ${sol.decimalPlaces} ตำแหน่งสอดคล้องกับค่าความคลาดเคลื่อน $\\rightarrow$ <strong>$${meanFinalText}$</strong></p>
+          <p class="font-bold text-slate-800 mt-2">คำตอบสากลสุดท้ายคือ: $${meanFinalText} \\pm ${deltaFinalText} \\text{ ${currentPracticeData.unit}}$</p>
+        `;
+      }
+
+      // Display Feedback
+      if (isCorrect) {
+        feedback.className = "p-5 rounded-2xl border bg-emerald-50 border-emerald-100 text-emerald-800 space-y-2 block";
+        feedback.innerHTML = `
+          <div class="flex items-center gap-2 font-bold text-base">
+            <i class="fa-solid fa-circle-check text-xl text-emerald-500"></i>
+            <span>เก่งมาก! ตอบถูกเผงตามหลักเกณฑ์ฟิสิกส์!</span>
+          </div>
+          <p class="text-xs text-emerald-700">คุณตอบได้ตรงทั้งค่ากลางและปรับเศษเลขนัยสำคัญของความคลาดเคลื่อนถูกต้องดีมากครับ</p>
+        `;
+      } else {
+        feedback.className = "p-5 rounded-2xl border bg-rose-50 border-rose-100 text-rose-800 space-y-2 block";
+        feedback.innerHTML = `
+          <div class="flex items-center gap-2 font-bold text-base">
+            <i class="fa-solid fa-circle-xmark text-xl text-rose-500"></i>
+            <span>ยังไม่ถูกต้องนะเกลอ! ลองวิเคราะห์วิธีคิดด้านล่างนี้</span>
+          </div>
+          <p class="text-xs text-rose-700">ตรวจสอบทั้งค่าตัวเลขและจำนวนตำแหน่งทศนิยมด้วยนะครับ เช่น เฉลย $14.0 \\pm 0.1$ ต้องตอบ $14.0$ ไม่ใช่ $14$ หรือ $14.0000$</p>
+        `;
+      }
+
+      // Display Explanation Box
+      document.getElementById('prac-explanation-text').innerHTML = detailedExplain;
+      document.getElementById('prac-explanation-box').classList.remove('hidden');
+
+      renderMath();
+    }
+
+
+    // ----------------------------------------------------
+    // EXAM MANAGEMENT SYSTEM
+    // ----------------------------------------------------
+    function startExamProcess() {
+      const name = document.getElementById('exam-student-name').value.trim();
+      const cls = document.getElementById('exam-student-class').value.trim();
+      const num = document.getElementById('exam-student-no').value.trim();
+
+      if (!name || !cls || !num) {
+        triggerAlert("ข้อมูลไม่ครบ!", "โปรดกรอกชื่อ ชั้นเรียน และเลขที่ผู้เรียนให้ครบถ้วนก่อนจะเริ่มลุยข้อสอบนะครับเพื่อนำไปทำเกียรติบัตรยื่นครู", "fa-user-clock", "bg-indigo-100 text-indigo-600");
+        return;
+      }
+
+      examStudentInfo = { name, class: cls, number: num };
+
+      // Initialize the live exam parameters
+      currentExamData = {
+        q1: generateSingleMeasurementQuestion(),
+        q2: generateRepeatedMeasurementQuestion()
+      };
+
+      // Populate Live Exam Screen
+      document.getElementById('lbl-exam-user-info').innerText = `${name} (ม.4/${cls} เลขที่ ${num})`;
+      document.getElementById('exam-q1-text').innerText = `ดูภาพสเกลด้านล่างแล้วรายงานผลการวัดในรูป x ± Δx (หน่วย ${currentExamData.q1.unit})`;
+      document.getElementById('exam-q2-text').innerText = currentExamData.q2.questionText;
+      renderSingleMeasurementFigure(currentExamData.q1, 'exam-q1-figure');
+
+      // Clear input fields
+      document.getElementById('exam-q1-mean').value = '';
+      document.getElementById('exam-q1-unc').value = '';
+      document.getElementById('exam-q2-mean').value = '';
+      document.getElementById('exam-q2-unc').value = '';
+      initializeExamSession(currentExamData, examStudentInfo);
+      showSection('exam-live');
+    }
+
+    function confirmSubmitExam() {
+      // Trigger a clean confirmation inside modal
+      const q1m = document.getElementById('exam-q1-mean').value.trim();
+      const q1u = document.getElementById('exam-q1-unc').value.trim();
+      const q2m = document.getElementById('exam-q2-mean').value.trim();
+      const q2u = document.getElementById('exam-q2-unc').value.trim();
+
+      let unfinishedText = "";
+      if (!q1m || !q1u || !q2m || !q2u) {
+        unfinishedText = " (คุณยังเขียนกรอกช่องคำตอบไม่ครบทุกข้อนะ)";
+      }
+
+      if (confirm(`ยืนยันที่จะส่งกระดาษคำตอบวิชาฟิสิกส์ ม.4 หรือไม่?${unfinishedText}`)) {
+        submitExam();
+      }
+    }
+
+    function submitExam(timeExpired = false) {
+      if (examSubmissionInProgress) return;
+      examSubmissionInProgress = true;
+      clearInterval(examTimerInterval);
+
+      if (!currentExamData) {
+        endExamSession();
+        triggerAlert("ไม่พบชุดข้อสอบ", "ระบบไม่พบข้อมูลข้อสอบที่กำลังทำอยู่ กรุณาเริ่มสอบใหม่อีกครั้ง", "fa-triangle-exclamation", "bg-rose-100 text-rose-600");
+        showSection('exam-start');
+        return;
+      }
+
+      // Extract user answer strings so significant decimal places are graded too.
+      const q1_user_mean_str = document.getElementById('exam-q1-mean').value.trim();
+      const q1_user_unc_str = document.getElementById('exam-q1-unc').value.trim();
+      const q2_user_mean_str = document.getElementById('exam-q2-mean').value.trim();
+      const q2_user_unc_str = document.getElementById('exam-q2-unc').value.trim();
+
+      // Grade Q1 (2 Pts)
+      const q1_target_mean = currentExamData.q1.measuredValue;
+      const q1_target_unc = currentExamData.q1.deltaX;
+      const q1_required_dp = getDecimalPlaces(q1_target_unc);
+      const q1_mean_correct = isSingleMeanAnswerCorrect(q1_user_mean_str, currentExamData.q1);
+      const q1_unc_correct = isNumericAnswerWithExactDecimals(q1_user_unc_str, q1_target_unc, q1_required_dp);
+      const q1_correct = q1_mean_correct && q1_unc_correct;
+      const q1_score = q1_correct ? 2.0 : 0.0;
+
+      // Grade Q2 (3 Pts)
+      const q2_sol = currentExamData.q2.solution;
+      const q2_mean_correct = isNumericAnswerWithExactDecimals(q2_user_mean_str, q2_sol.meanFinal, q2_sol.decimalPlaces);
+      const q2_unc_correct = isNumericAnswerWithExactDecimals(q2_user_unc_str, q2_sol.deltaFinal, q2_sol.decimalPlaces);
+      const q2_correct = q2_mean_correct && q2_unc_correct;
+      const q2_score = q2_correct ? 3.0 : 0.0;
+
+      const total_score = q1_score + q2_score;
+      examTimeRemaining = Math.max(0, getCurrentExamRemainingSeconds());
+      const time_taken_sec = timeExpired ? EXAM_DURATION_SECONDS : Math.min(EXAM_DURATION_SECONDS, EXAM_DURATION_SECONDS - examTimeRemaining);
+      
+      const m = Math.floor(time_taken_sec / 60);
+      const s = time_taken_sec % 60;
+      const time_taken_str = `${m} นาที ${s} วินาที`;
+      const finishedAt = new Date();
+      const finishedAtDisplay = formatThaiDateTimeBuddhistEra(finishedAt);
+
+      // Save to local storage for persistence
+      const examResultsToSave = {
+        score: total_score,
+        q1Correct: q1_correct,
+        q2Correct: q2_correct,
+        timeTaken: time_taken_str,
+        finishedAt: finishedAt.toISOString(),
+        finishedAtDisplay: finishedAtDisplay,
+        studentInfo: examStudentInfo,
+        examData: currentExamData,
+        date: finishedAt.toLocaleDateString('th-TH-u-ca-buddhist')
+      };
+      localStorage.setItem('last_exam_results', JSON.stringify(examResultsToSave));
+      endExamSession();
+
+      // Show Results
+      showSection('exam-result');
+      displayExamResults(total_score, q1_correct, q2_correct, time_taken_str, examStudentInfo, finishedAtDisplay);
+      updateLatestScoreOnHome();
+    }
+
+    function displayExamResults(score, q1Correct, q2Correct, timeTaken, studentInfo, finishedAtDisplay = '-') {
+      // Set student display
+      document.getElementById('lbl-res-student-name').innerText = studentInfo.name;
+      document.getElementById('lbl-res-student-meta').innerText = `ชั้น ม.4/${studentInfo.class} เลขที่ ${studentInfo.number}`;
+      document.getElementById('lbl-res-time-elapsed').innerText = `ใช้เวลาไปทั้งหมด: ${timeTaken}`;
+      document.getElementById('lbl-res-finished-at').innerText = `ส่งข้อสอบเมื่อ: ${finishedAtDisplay}`;
+      
+      // Update circle progress
+      const percent = (score / 5) * 100;
+      const circle = document.getElementById('res-circle-progress');
+      // circumference is 2 * PI * r = 2 * 3.14159 * 50 = 314
+      const offset = 314 - (percent / 100) * 314;
+      circle.style.strokeDashoffset = offset;
+
+      // Set score texts
+      document.getElementById('lbl-res-total-score').innerText = score;
+      document.getElementById('lbl-res-q1-score').innerText = q1Correct ? "2.0" : "0.0";
+      document.getElementById('lbl-res-q2-score').innerText = q2Correct ? "3.0" : "0.0";
+
+      // Status Badges
+      const q1Status = document.getElementById('lbl-res-q1-status');
+      const q2Status = document.getElementById('lbl-res-q2-status');
+
+      if (q1Correct) {
+        q1Status.innerHTML = `<span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-circle-check"></i> ถูก</span>`;
+      } else {
+        q1Status.innerHTML = `<span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-circle-xmark"></i> ผิด</span>`;
+      }
+
+      if (q2Correct) {
+        q2Status.innerHTML = `<span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-circle-check"></i> ถูก</span>`;
+      } else {
+        q2Status.innerHTML = `<span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-circle-xmark"></i> ผิด</span>`;
+      }
+
+      // Analyze motivation feedback
+      const feedbackLabel = document.getElementById('lbl-res-badge-feedback');
+      
+      // Convert time taken string to seconds for checking Speed bonus
+      const minutesPart = parseInt(timeTaken) || 0;
+      const isFast = minutesPart < 2; // Finished under 2 minutes
+
+      if (score === 5) {
+        if (isFast) {
+          feedbackLabel.className = "text-xs bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-lg border border-emerald-200 font-semibold leading-relaxed block";
+          feedbackLabel.innerHTML = `🌟 <strong>ยอดเยี่ยม ทำได้เร็วมาก!</strong> เข้าใจการรายงานผลการวัดได้สมบูรณ์แบบไร้ที่ติ`;
+        } else {
+          feedbackLabel.className = "text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-lg border border-emerald-100 font-semibold leading-relaxed block";
+          feedbackLabel.innerHTML = `🌟 <strong>ยอดเยี่ยม!</strong> คุณตอบถูกหมดทุกสเกล มีความละเอียดรอบคอบดีมากครับ`;
+        }
+      } else if (score >= 3) {
+        if (isFast) {
+          feedbackLabel.className = "text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-lg border border-amber-100 font-semibold leading-relaxed block";
+          feedbackLabel.innerHTML = `👍 <strong>ดีมาก แต่ควรทบทวนเรื่องเลขนัยสำคัญ!</strong> คุณทำงานเร็วดีแต่อาจจะรีบปัดตัวเลขความคลาดเคลื่อนเกินไปนิดครับ`;
+        } else {
+          feedbackLabel.className = "text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-lg border border-amber-100 font-semibold leading-relaxed block";
+          feedbackLabel.innerHTML = `👍 <strong>ดีมาก!</strong> ผ่านเกณฑ์ประเมิน แต่ควรทบทวนเรื่องเลขนัยสำคัญและค่าคลาดเคลื่อนบ่อยๆ นะครับ`;
+        }
+      } else {
+        feedbackLabel.className = "text-xs bg-rose-50 text-rose-700 px-3 py-1.5 rounded-lg border border-rose-100 font-semibold leading-relaxed block";
+        feedbackLabel.innerHTML = `📚 <strong>ควรกลับไปทบทวนเนื้อหาและฝึกโจทย์เพิ่ม!</strong> ไม่เป็นไรนะเพื่อนๆ การรายงานตัวเลขวัดนี้ค่อนข้างจุกจิกเรื่องตำแหน่งทศนิยม ลองฝึกใหม่นะ!`;
+      }
+
+      // Populate detailed solution logs
+      populateExamSolutions();
+    }
+
+    // Helper: Build and Inject Solutions
+    function populateExamSolutions() {
+      // Inject details for exam Q1 solution
+      const q1 = currentExamData.q1;
+      const resolution = q1.resolution;
+      const targetMean = q1.measuredValue;
+      const targetUnc = q1.deltaX;
+      const dp = getDecimalPlaces(targetUnc);
+      
+      const { lower: lowerBound, upper: upperBound } = getSingleMeasurementBounds(q1);
+      const tolerance = getSingleMeanTolerance(q1);
+      const deltaRounding = getRoundingExplanation(resolution / 2, targetUnc, 'การปัดค่าความคลาดเคลื่อน', q1.unit);
+      const meanRounding = getRoundingExplanation(q1.rawMeasuredValue || targetMean, roundHalfEven(targetMean, dp), 'การปัดค่าที่อ่านได้', q1.unit);
+      const targetMeanText = formatHalfEven(targetMean, dp);
+      const targetUncText = formatHalfEven(targetUnc, dp);
+      const lowerBoundText = formatHalfEven(lowerBound, dp);
+      const upperBoundText = formatHalfEven(upperBound, dp);
+      const minAcceptedText = formatHalfEven(targetMean - tolerance, dp);
+      const maxAcceptedText = formatHalfEven(targetMean + tolerance, dp);
+      const measuredRawText = formatHalfEven(getSingleMeasurementReferenceValue(q1), Math.max(dp, 2));
+
+      document.getElementById('lbl-exam-sol-q1-text').innerText = `ภาพข้อสอบแสดงปลายวัตถุบนสเกล หน่วย ${q1.unit}`;
+      document.getElementById('lbl-exam-sol-q1-detail').innerHTML = `
+        <p><strong>ขั้นตอนที่ 1: อ่านค่ากลาง ($x$)</strong><br>
+        ปลายวัตถุอยู่ระหว่างขีด $${lowerBoundText}$ และ $${upperBoundText} \\text{ ${q1.unit}}$ โดยตำแหน่งจริงบนภาพอยู่ประมาณ $${measuredRawText} \\text{ ${q1.unit}}$ เมื่อนำไปรายงานตามตำแหน่งทศนิยมที่สอดคล้องกัน จะได้ $x = ${targetMeanText} \\text{ ${q1.unit}}$<br>
+        ในการตรวจคำตอบ ระบบยอมรับค่ากะประมาณที่สมเหตุสมผลในช่วง ${minAcceptedText} ถึง ${maxAcceptedText} ${q1.unit} แต่ค่าความคลาดเคลื่อนต้องตรงตามสเกลของเครื่องมือ</p>
+        <p><strong>ขั้นตอนที่ 2: หาความคลาดเคลื่อน ($\\Delta x$) จากสองขีดสเกลที่ขนาบคร่อมตัววัตถุอยู่</strong><br>
+        ปลายวัตถุจริง $${measuredRawText}$ ตกอยู่ระหว่างขีดล่าง $x_{\\text{ขีดล่าง}} = ${lowerBoundText} \\text{ ${q1.unit}}$ และขีดบน $x_{\\text{ขีดบน}} = ${upperBoundText} \\text{ ${q1.unit}}$<br>
+        คำนวณหาความคลาดเคลื่อน:<br>
+        $$\\Delta x = \\frac{|x_{\\text{ขีดบน}} - x_{\\text{ขีดล่าง}}|}{2} = \\frac{|${upperBoundText} - ${lowerBoundText}|}{2} = \\frac{${resolution}}{2} = ${targetUncText} \\text{ ${q1.unit}}$$<br>
+        <em>วิธีคิดผลต่างสเกลคร่อมล้อมรอบช่วยเลี่ยงข้อผิดพลาดในกรณีเครื่องมือสเกลพิเศษได้ดีที่สุด</em></p>
+        <p><strong>ขั้นตอนที่ 3: ปัดเลขและรายงานผลสากล</strong><br>
+        ${deltaRounding}<br>
+        ${meanRounding}<br>
+        ค่า $\\Delta x = ${targetUncText}$ มีทศนิยม ${dp} ตำแหน่ง ดังนั้นตัวเลขค่ากลางต้องรายงานเป็นทศนิยม ${dp} ตำแหน่งเท่ากันพอดีด้วย</p>
+        <p class="font-bold text-slate-800">คำตอบที่ถูกต้องคือ: ${targetMeanText} $\\pm$ ${targetUncText} ${q1.unit}</p>
+      `;
+
+      // Inject details for exam Q2 solution
+      const q2 = currentExamData.q2;
+      const sol = q2.solution;
+      document.getElementById('lbl-exam-sol-q2-text').innerText = q2.questionText;
+
+      let outlierText = "";
+      if (sol.outliers.length > 0) {
+        outlierText = `ตรวจสอบพบข้อมูลผิดปกติ (Outlier) ได้แก่ <strong>${sol.outliers.join(', ')}</strong> เนื่องจากมีค่าห่างจากช่วงข้อมูลหลักเกิน 1.5 หน่วย จึงต้องตัดออกก่อนประมวลผล`;
+      } else {
+        outlierText = `ตรวจสอบแล้วไม่พบข้อมูลที่ผิดปกติ จึงนำทั้ง ${sol.validData.length} ค่ามาคำนวณทั้งหมด`;
+      }
+      const q2DeltaRounding = getRoundingExplanation(sol.deltaRaw, sol.deltaFinal, 'การปัดค่าความคลาดเคลื่อน', q2.unit);
+      const q2MeanRounding = getRoundingExplanation(sol.meanRaw, sol.meanFinal, 'การปัดค่าเฉลี่ย', q2.unit);
+      const meanRawText = formatHalfEven(sol.meanRaw, 4);
+      const deltaRawText = formatHalfEven(sol.deltaRaw, 4);
+      const meanFinalText = formatHalfEven(sol.meanFinal, sol.decimalPlaces);
+      const deltaFinalText = formatHalfEven(sol.deltaFinal, sol.decimalPlaces);
+
+      document.getElementById('lbl-exam-sol-q2-detail').innerHTML = `
+        <p><strong>1. การคัดกรองข้อมูล:</strong><br>${outlierText}</p>
+        <p><strong>2. หาค่าเฉลี่ยดิบ ($\\bar{x}$):</strong><br>
+        $$\\bar{x} = \\frac{${sol.validData.join(' + ')}}{${sol.validData.length}} = ${meanRawText} \\text{ ${q2.unit}}$$</p>
+        <p><strong>3. หาความคลาดเคลื่อนดิบ ($\\Delta \\bar{x}$):</strong><br>
+        $$\\Delta \\bar{x} = \\frac{${Math.max(...sol.validData)} (x_{\\max}) - ${Math.min(...sol.validData)} (x_{\\min})}{2} = ${deltaRawText}$$</p>
+        <p><strong>4. ปรับเลขนัยสำคัญ 1 ตัวที่ความคลาดเคลื่อน:</strong><br>
+        ${q2DeltaRounding}<br>
+        ได้ค่าคลาดเคลื่อนสุดท้ายเป็น <strong>$${deltaFinalText}$</strong> (ทศนิยม ${sol.decimalPlaces} ตำแหน่ง)</p>
+        <p><strong>5. จัดทศนิยมให้สอดคล้องกัน:</strong><br>
+        ${q2MeanRounding}<br>
+        ปัดค่ากลาง $\\bar{x}$ ให้สอดคล้องกันเป็นทศนิยม ${sol.decimalPlaces} ตำแหน่ง $\\rightarrow$ <strong>$${meanFinalText}$</strong></p>
+        <p class="font-bold text-slate-800">คำตอบสุดท้ายคือ: ${meanFinalText} $\\pm$ ${deltaFinalText} ${q2.unit}</p>
+      `;
+
+      renderMath();
+    }
+
+    function toggleExamSolutionBox() {
+      const box = document.getElementById('exam-solution-box');
+      const text = document.getElementById('lbl-toggle-solution-text');
+      if (box.classList.contains('hidden')) {
+        box.classList.remove('hidden');
+        text.innerText = "ซ่อนเฉลยละเอียดของข้อสอบ";
+      } else {
+        box.classList.add('hidden');
+        text.innerText = "ดูเฉลยละเอียดของข้อที่คุณได้รับ";
+      }
+    }
+  </script>
+</body>
+</html>
+
+
