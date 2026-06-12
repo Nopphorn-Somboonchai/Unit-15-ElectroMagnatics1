@@ -873,7 +873,7 @@
                 <div class="text-xs space-y-1 text-blue-100 font-mono">
                   <p>$\Phi = (B) \times (A \times 10^{-4}) \times \sin(\theta)$</p>
                   <p id="lbl-sim1-calc">$\Phi = 1.0 \times 0.0050 \times \sin(30^\circ)$</p>
-                  <p class="text-sm font-bold text-cyan-300 mt-1">ฟลักซ์แม่เหล็ก $\Phi = $ <span id="lbl-sim1-result">2.50 × 10⁻³</span> Wb</p>
+                  <p class="text-sm font-bold text-cyan-300 mt-1">ฟลักซ์แม่เหล็ก $\Phi = $ <span id="lbl-sim1-result"></span></p>
                 </div>
               </div>
             </div>
@@ -999,7 +999,7 @@
                 <div class="text-xs space-y-1 text-indigo-100 font-mono">
                   <p>$F = (1.6 \times 10^{-19}) \times (v) \times (B \times 10^{-3})$</p>
                   <p id="lbl-sim2-calc">$F = (1.6 \times 10^{-19}) \times (2.0 \times 10^6) \times (5.0 \times 10^{-3})$</p>
-                  <p class="text-sm font-bold text-cyan-300 mt-1">แรงแม่เหล็ก $F = $ <span id="lbl-sim2-result">1.60 × 10⁻¹⁵</span> N</p>
+                  <p class="text-sm font-bold text-cyan-300 mt-1">แรงแม่เหล็ก $F = $ <span id="lbl-sim2-result"></span></p>
                 </div>
               </div>
             </div>
@@ -1074,8 +1074,8 @@
                 <div class="text-xs space-y-1 text-indigo-100 font-mono">
                   <p>$F = I \times (l \times 10^{-2}) \times B$</p>
                   <p id="lbl-sim2-wire-calc">$F = 4.0 \times 0.05 \times 0.2 = 0.040\text{ N}$</p>
-                  <p class="text-sm font-bold text-cyan-300 mt-1">แรงแม่เหล็ก $F = $ <span id="lbl-sim2-wire-force-res">0.040</span> N</p>
-                  <p class="text-sm font-bold text-cyan-300">ความเร่ง $a = $ <span id="lbl-sim2-wire-acc-res">2.0</span> m/s²</p>
+                  <p class="text-sm font-bold text-cyan-300 mt-1">แรงแม่เหล็ก $F = $ <span id="lbl-sim2-wire-force-res"></span></p>
+                  <p class="text-sm font-bold text-cyan-300">ความเร่ง $a = $ <span id="lbl-sim2-wire-acc-res"></span></p>
                 </div>
               </div>
             </div>
@@ -1176,7 +1176,7 @@
                 <div class="text-xs space-y-1 text-violet-100 font-mono">
                   <p>$M = N \times I \times (10 \times 10^{-4}) \times 5 \times \cos(\theta)$</p>
                   <p id="lbl-sim3-calc">$M = 400 \times 6 \times 0.001 \times 5 \times \cos(60^\circ)$</p>
-                  <p class="text-sm font-bold text-cyan-300 mt-1">โมเมนต์ขดลวด $M = $ <span id="lbl-sim3-result">6.00</span> N·m</p>
+                  <p class="text-sm font-bold text-cyan-300 mt-1">โมเมนต์ขดลวด $M = $ <span id="lbl-sim3-result"></span></p>
                 </div>
               </div>
             </div>
@@ -2011,13 +2011,13 @@ function initFluxSimulator() {
     const angle = parseFloat(sliderAngle.value);
     const B = parseFloat(sliderField.value);
     const A_cm2 = parseFloat(sliderArea.value);
-    document.getElementById('lbl-sim1-angle').innerText = `${angle}°`;
-    document.getElementById('lbl-sim1-field').innerText = `${B.toFixed(1)} T`;
-    document.getElementById('lbl-sim1-area').innerText = `${A_cm2} cm²`;
+    document.getElementById('lbl-sim1-angle').innerHTML = `$${angle}^\\circ$`;
+    document.getElementById('lbl-sim1-field').innerHTML = `$${B.toFixed(1)}\\text{ T}$`;
+    document.getElementById('lbl-sim1-area').innerHTML = `$${A_cm2}\\text{ cm}^2$`;
     const A_m2 = A_cm2 * 1e-4;
     const flux = B * A_m2 * Math.sin(angle * Math.PI / 180);
-    document.getElementById('lbl-sim1-calc').innerHTML = `\\Phi = ${B.toFixed(1)} \\times (${A_cm2} \\times 10^{-4}) \\times \\sin(${angle}^\\circ)`;
-    document.getElementById('lbl-sim1-result').innerText = flux.toExponential(2).replace('e', ' \\times 10^{') + '}';
+    document.getElementById('lbl-sim1-calc').innerHTML = `$\\Phi = ${B.toFixed(1)} \\times (${A_cm2} \\times 10^{-4}) \\times \\sin(${angle}^\\circ)$`;
+    document.getElementById('lbl-sim1-result').innerHTML = `$${formatSci(flux)}\\text{ Wb}$`;
     renderMath();
     drawFluxSim(angle, B, A_cm2);
   };
@@ -2087,15 +2087,15 @@ function initChargeSimulator() {
     const chargeType = selectCharge.value;
     const vVal = parseFloat(sliderVelocity.value);
     const BVal = parseFloat(sliderField.value);
-    document.getElementById('lbl-sim2-charge').innerText = chargeType === 'positive' ? 'บวก (+1.6 × 10⁻¹⁹ C)' : 'ลบ (-1.6 × 10⁻¹⁹ C)';
-    document.getElementById('lbl-sim2-velocity').innerText = `${vVal.toFixed(1)} × 10⁶ m/s`;
-    document.getElementById('lbl-sim2-field').innerText = `${BVal.toFixed(1)} mT`;
+    document.getElementById('lbl-sim2-charge').innerHTML = chargeType === 'positive' ? 'บวก ($+1.6 \\times 10^{-19}\\text{ C}$)' : 'ลบ ($-1.6 \\times 10^{-19}\\text{ C}$)';
+    document.getElementById('lbl-sim2-velocity').innerHTML = `$${vVal.toFixed(1)} \\times 10^6\\text{ m/s}$`;
+    document.getElementById('lbl-sim2-field').innerHTML = `$${BVal.toFixed(1)}\\text{ mT}$`;
     const q = 1.6e-19;
     const v = vVal * 1e6;
     const B = BVal * 1e-3;
     const force = q * v * B;
-    document.getElementById('lbl-sim2-calc').innerHTML = `F = (1.6 \\times 10^{-19}) \\times (${vVal.toFixed(1)} \\times 10^6) \\times (${BVal.toFixed(1)} \\times 10^{-3})`;
-    document.getElementById('lbl-sim2-result').innerText = force.toExponential(2).replace('e', ' \\times 10^{') + '} N';
+    document.getElementById('lbl-sim2-calc').innerHTML = `$F = (1.6 \\times 10^{-19}) \\times (${vVal.toFixed(1)} \\times 10^6) \\times (${BVal.toFixed(1)} \\times 10^{-3})$`;
+    document.getElementById('lbl-sim2-result').innerHTML = `$${formatSci(force)}\\text{ N}$`;
     renderMath();
     drawChargeSim(chargeType, vVal, BVal);
   };
@@ -2169,17 +2169,17 @@ function initWireSimulator() {
     const B = parseFloat(sliderField.value);
     const l_cm = parseFloat(sliderLength.value);
     const m_g = parseFloat(sliderMass.value);
-    document.getElementById('lbl-sim2-wire-current').innerText = `${I.toFixed(1)} A`;
-    document.getElementById('lbl-sim2-wire-field').innerText = `${B.toFixed(1)} T`;
-    document.getElementById('lbl-sim2-wire-length').innerText = `${l_cm} cm`;
-    document.getElementById('lbl-sim2-wire-mass').innerText = `${m_g} g`;
+    document.getElementById('lbl-sim2-wire-current').innerHTML = `$${I.toFixed(1)}\\text{ A}$`;
+    document.getElementById('lbl-sim2-wire-field').innerHTML = `$${B.toFixed(1)}\\text{ T}$`;
+    document.getElementById('lbl-sim2-wire-length').innerHTML = `$${l_cm}\\text{ cm}$`;
+    document.getElementById('lbl-sim2-wire-mass').innerHTML = `$${m_g}\\text{ g}$`;
     const l_m = l_cm * 1e-2;
     const force = I * l_m * B;
     const m_kg = m_g * 1e-3;
     const acc = force / m_kg;
-    document.getElementById('lbl-sim2-wire-calc').innerHTML = `F = ${I.toFixed(1)} \\times ${l_m.toFixed(2)} \\times ${B.toFixed(1)} = ${force.toFixed(3)}\\text{ N}`;
-    document.getElementById('lbl-sim2-wire-force-res').innerText = force.toFixed(3);
-    document.getElementById('lbl-sim2-wire-acc-res').innerText = acc.toFixed(1);
+    document.getElementById('lbl-sim2-wire-calc').innerHTML = `$F = ${I.toFixed(1)} \\times ${l_m.toFixed(2)} \\times ${B.toFixed(1)} = ${force.toFixed(3)}\\text{ N}$`;
+    document.getElementById('lbl-sim2-wire-force-res').innerHTML = `$${force.toFixed(3)}\\text{ N}$`;
+    document.getElementById('lbl-sim2-wire-acc-res').innerHTML = `$${acc.toFixed(1)}\\text{ m/s}^2$`;
     renderMath();
     drawWireSimStatic(wirePos, I, B, l_cm);
   };
@@ -2307,14 +2307,14 @@ function initMomentSimulator() {
     const angle = parseFloat(sliderAngle.value);
     const N = parseFloat(sliderTurns.value);
     const I = parseFloat(sliderCurrent.value);
-    document.getElementById('lbl-sim3-angle').innerText = `${angle}°`;
-    document.getElementById('lbl-sim3-turns').innerText = `${N} รอบ`;
-    document.getElementById('lbl-sim3-current').innerText = `${I.toFixed(1)} A`;
+    document.getElementById('lbl-sim3-angle').innerHTML = `$${angle}^\\circ$`;
+    document.getElementById('lbl-sim3-turns').innerHTML = `$${N}\\text{ รอบ}$`;
+    document.getElementById('lbl-sim3-current').innerHTML = `$${I.toFixed(1)}\\text{ A}$`;
     const A = 10 * 1e-4;
     const B = 5;
     const M = N * I * A * B * Math.cos(angle * Math.PI / 180);
-    document.getElementById('lbl-sim3-calc').innerHTML = `M = ${N} \\times ${I.toFixed(1)} \\times 0.001 \\times 5 \\times \\cos(${angle}^\\circ)`;
-    document.getElementById('lbl-sim3-result').innerText = M.toFixed(3);
+    document.getElementById('lbl-sim3-calc').innerHTML = `$M = ${N} \\times ${I.toFixed(1)} \\times 0.001 \\times 5 \\times \\cos(${angle}^\\circ)$`;
+    document.getElementById('lbl-sim3-result').innerHTML = `$${M.toFixed(2)}\\text{ N}\\cdot\\text{m}$`;
     renderMath();
     drawMomentSim(angle, N, I);
   };
@@ -2402,7 +2402,7 @@ const QUESTION_TEMPLATES = [
       const a1 = 0, a2 = B * (A * 1e-4);
       return {
         params: { A, B }, answers: [a1.toString(), formatSci(a2)], answersRaw: [a1, a2],
-        explanation: () => `จากสูตร $\\Phi = BA \\sin\\theta$. เมื่อ $\\theta=0^\\circ$, $\\Phi = 0$ Wb. เมื่อ $\\theta=90^\\circ$, $\\Phi = ${B} \\times (${A} \\times 10^{-4}) \\times 1 = ${formatSci(a2)}$ Wb.`
+        explanation: () => `จากสูตร $\\Phi = BA \\sin\\theta$ เมื่อ $\\theta=0^\\circ$ จะได้ $\\Phi = 0\\text{ Wb}$ และเมื่อ $\\theta=90^\\circ$ จะได้ $\\Phi = ${B} \\times (${A} \\times 10^{-4}) \\times 1 = ${formatSci(a2)}\\text{ Wb}$`
       };
     }
   },
@@ -2417,7 +2417,7 @@ const QUESTION_TEMPLATES = [
       const Phi = B * (A * 1e-4);
       return {
         params: { A, PhiDisp: Phi.toExponential(2).replace('e', ' \\times 10^{') + '}' }, answers: [B.toFixed(2)], answersRaw: [B],
-        explanation: () => `จาก $\\Phi = BA \\sin(90^\\circ) = BA \\rightarrow B = \\frac{\\Phi}{A} = \\frac{${Phi.toExponential(2)}}{${A} \\times 10^{-4}} = ${B.toFixed(2)}$ T.`
+        explanation: () => `จาก $\\Phi = BA \\sin(90^\\circ) = BA \\rightarrow B = \\frac{\\Phi}{A} = \\frac{${formatSci(Phi)}}{${A} \\times 10^{-4}} = ${B.toFixed(2)}\\text{ T}$`
       };
     }
   },
@@ -2433,7 +2433,7 @@ const QUESTION_TEMPLATES = [
       const val = B * (A * 1e-4) * Math.sin(angle * Math.PI / 180);
       return {
         params: { A, B, angle }, answers: [formatSci(val)], answersRaw: [val],
-        explanation: () => `จาก $\\Phi = BA \\sin\\theta = ${B} \\times (${A} \\times 10^{-4}) \\times \\sin(${angle}^\\circ) = ${formatSci(val)}$ Wb.`
+        explanation: () => `จาก $\\Phi = BA \\sin\\theta = ${B} \\times (${A} \\times 10^{-4}) \\times \\sin(${angle}^\\circ) = ${formatSci(val)}\\text{ Wb}$`
       };
     }
   },
@@ -2451,7 +2451,7 @@ const QUESTION_TEMPLATES = [
       const F = q * (vVal * 1e6) * B * Math.sin(angle * Math.PI / 180);
       return {
         params: { v: `${vVal} \\times 10^6`, B: `${BVal} \\times 10^{-3}`, angle }, answers: [formatSci(F)], answersRaw: [F],
-        explanation: () => `จาก $F = qvB\\sin\\theta = (1.60 \\times 10^{-19}) \\times (${vVal} \\times 10^6) \\times (${BVal} \\times 10^{-3}) \\times \\sin(${angle}^\\circ) = ${formatSci(F)}$ N.`
+        explanation: () => `จาก $F = qvB\\sin\\theta = (1.60 \\times 10^{-19}) \\times (${vVal} \\times 10^6) \\times (${BVal} \\times 10^{-3}) \\times \\sin(${angle}^\\circ) = ${formatSci(F)}\\text{ N}$`
       };
     }
   },
@@ -2469,7 +2469,7 @@ const QUESTION_TEMPLATES = [
       const a = F / (m * 1e-3);
       return {
         params: { m, l, I, B }, answers: [a.toFixed(1), a.toFixed(2)], answersRaw: [a],
-        explanation: () => `แรงแม่เหล็ก $F = IlB = ${I} \\times ${(l*1e-2)} \\times ${B} = ${F.toFixed(3)}$ N. จาก $F = ma \\rightarrow a = \\frac{F}{m} = \\frac{${F.toFixed(3)}}{${(m*1e-3)}} = ${a.toFixed(1)}$ m/s².`
+        explanation: () => `แรงแม่เหล็ก $F = IlB = ${I} \\times ${(l*1e-2)} \\times ${B} = ${F.toFixed(3)}\\text{ N}$ จาก $F = ma \\rightarrow a = \\frac{F}{m} = \\frac{${F.toFixed(3)}}{${(m*1e-3)}} = ${a.toFixed(1)}\\text{ m/s}^2$`
       };
     }
   },
@@ -2503,7 +2503,7 @@ const QUESTION_TEMPLATES = [
       const M_max = N * I * B * (A * 1e-4);
       return {
         params: { A, N, I, B }, answers: [M_max.toFixed(1), M_max.toFixed(2)], answersRaw: [M_max],
-        explanation: () => `โมเมนต์สูงสุด $M_{\\text{max}} = NIAB = ${N} \\times ${I} \\times ${B} \\times (${A} \\times 10^{-4}) = ${M_max.toFixed(1)}$ N·m.`
+        explanation: () => `โมเมนต์สูงสุด $M_{\\text{max}} = NIAB = ${N} \\times ${I} \\times ${B} \\times (${A} \\times 10^{-4}) = ${M_max.toFixed(1)}\\text{ N}\\cdot\\text{m}$`
       };
     }
   },
@@ -2522,7 +2522,7 @@ const QUESTION_TEMPLATES = [
       const M = N * I * B * (A * 1e-4) * cosVal;
       return {
         params: { A, N, I, B, angle }, answers: [M.toFixed(1), M.toFixed(2)], answersRaw: [M],
-        explanation: () => `โมเมนต์ของขดลวด $M = NIAB \\cos\\theta = ${N} \\times ${I} \\times (${A} \\times 10^{-4}) \\times ${B} \\times \\cos(${angle}^\\circ) = ${M.toFixed(1)}$ N·m.`
+        explanation: () => `โมเมนต์ของขดลวด $M = NIAB \\cos\\theta = ${N} \\times ${I} \\times (${A} \\times 10^{-4}) \\times ${B} \\times \\cos(${angle}^\\circ) = ${M.toFixed(1)}\\text{ N}\\cdot\\text{m}$`
       };
     }
   },
@@ -2542,7 +2542,7 @@ const QUESTION_TEMPLATES = [
       const angle = 60;
       return {
         params: { d, N, I, B }, answers: [M_max.toFixed(2), angle.toString()], answersRaw: [M_max, angle],
-        explanation: () => `พื้นที่ $A = \\pi r^2 = \\pi \\times (${r.toFixed(3)})^2 = ${A.toFixed(6)}$ m². โมเมนต์สูงสุด $M_{\\text{max}} = NIAB = ${N} \\times ${I} \\times ${B} \\times ${A.toFixed(6)} = ${M_max.toFixed(2)}$ N·m. โมเมนต์ลดลงเหลือครึ่งหนึ่งเมื่อ $\\cos\\theta = 0.5 \\rightarrow \\theta = 60^\\circ$.`
+        explanation: () => `พื้นที่ $A = \\pi r^2 = \\pi \\times (${r.toFixed(3)})^2 = ${A.toFixed(6)}\\text{ m}^2$ โมเมนต์สูงสุด $M_{\\text{max}} = NIAB = ${N} \\times ${I} \\times ${B} \\times ${A.toFixed(6)} = ${M_max.toFixed(2)}\\text{ N}\\cdot\\text{m}$ โมเมนต์ลดลงเหลือครึ่งหนึ่งเมื่อ $\\cos\\theta = 0.5 \\rightarrow \\theta = 60^\\circ$`
       };
     }
   }
