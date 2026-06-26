@@ -195,38 +195,7 @@
       fill: #fbfefb;
     }
 
-    .measurement-figure {
-      position: relative;
-      cursor: zoom-in;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      transition: transform 140ms ease, box-shadow 140ms ease;
-    }
 
-    .measurement-figure:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(20, 49, 61, 0.1);
-    }
-
-    .measurement-figure::after {
-      content: "แตะเพื่อซูม";
-      position: absolute;
-      right: 0.75rem;
-      top: 0.75rem;
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(20, 49, 61, 0.78);
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 700;
-      pointer-events: none;
-    }
-
-    #measurement-zoom-stage svg {
-      width: min(1120px, 175vw);
-      max-width: none;
-      height: auto;
-    }
 
     body.exam-locked header {
       position: static !important;
@@ -352,15 +321,6 @@
         border-radius: 14px;
       }
 
-      .measurement-figure svg {
-        min-width: 720px;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .measurement-figure svg {
-        min-width: 680px;
-      }
     }
 
     @media (max-height: 430px) and (orientation: landscape) {
@@ -1608,25 +1568,7 @@
     </div>
   </div>
 
-  <!-- Measurement Figure Zoom Modal -->
-  <div id="measurement-zoom-modal" onclick="if (event.target.id === 'measurement-zoom-modal') closeMeasurementZoom()"
-    class="hidden fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-sm p-3 md:p-6">
-    <div
-      class="h-full max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl border border-white/40 flex flex-col overflow-hidden">
-      <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-200">
-        <div>
-          <h3 class="font-bold text-slate-800 text-sm md:text-base">ภาพสเกลแบบขยาย</h3>
-          <p class="text-xs text-slate-500">เลื่อนซ้าย-ขวาเพื่ออ่านตัวเลขบนมือถือ</p>
-        </div>
-        <button onclick="closeMeasurementZoom()"
-          class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition"
-          aria-label="Close zoom">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div id="measurement-zoom-stage" class="flex-1 overflow-auto p-3 md:p-6 bg-slate-50"></div>
-    </div>
-  </div>
+
 
   <!-- Footer block -->
   <footer class="bg-slate-950 text-slate-300 py-8 border-t border-slate-900 text-center text-sm space-y-3 px-4">
@@ -2840,14 +2782,16 @@
       }
       examStudentInfo = { name, class: cls, number: num };
 
-      // สร้างตัวแปรการสุ่มแบบ Seeded RNG จากเลขที่ของผู้สอบ
-      const examRNG = new SeededRNG(num);
+      // สร้างตัวแปรการสุ่มแบบ Seeded RNG โดยใช้เลขที่ผู้เรียนร่วมกับข้อมูลเวลาและตัวเลขสุ่ม
+      // เพื่อให้การสอบแต่ละครั้งของเลขที่เดิมสุ่มได้ชุดคำถามและค่าพารามิเตอร์ที่ไม่ซ้ำกัน
+      const randomSeed = `${num}_${Date.now()}_${Math.floor(Math.random() * 1000000)}`;
+      const examRNG = new SeededRNG(randomSeed);
 
       const q15_1 = QUESTION_TEMPLATES.filter(q => q.topic === '15.1');
       const q15_2 = QUESTION_TEMPLATES.filter(q => q.topic === '15.2');
       const q15_3 = QUESTION_TEMPLATES.filter(q => q.topic === '15.3');
 
-      // สลับลำดับโจทย์แบบใช้ Seeded RNG เพื่อให้เลขที่เดิมได้ข้อสอบข้อเดิมเสมอ
+      // สลับลำดับโจทย์แบบใช้ Seeded RNG
       const shuffled_1 = examRNG.shuffle(q15_1);
       const shuffled_2 = examRNG.shuffle(q15_2);
       const shuffled_3 = examRNG.shuffle(q15_3);
